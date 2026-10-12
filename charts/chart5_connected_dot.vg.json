@@ -1,0 +1,83 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "The Australian Electoral Gender Gap",
+      "subtitle": "First-preference vote share (%) by gender across major party groupings",
+      "anchor": "start",
+      "fontSize": 15,
+      "font": "Public Sans"
+    },
+    "width": 460,
+    "height": 260,
+    "data": {
+      "values": [
+        {"party": "Coalition", "gender": "Men", "pct": 39.2},
+        {"party": "Coalition", "gender": "Women", "pct": 32.4},
+        {"party": "Labor", "gender": "Men", "pct": 31.8},
+        {"party": "Labor", "gender": "Women", "pct": 33.5},
+        {"party": "Greens", "gender": "Men", "pct": 10.1},
+        {"party": "Greens", "gender": "Women", "pct": 14.2},
+        {"party": "Independents / Teals", "gender": "Men", "pct": 8.5},
+        {"party": "Independents / Teals", "gender": "Women", "pct": 11.9}
+      ]
+    },
+    "encoding": {
+      "y": {
+        "field": "party",
+        "type": "nominal",
+        "title": "Party Grouping",
+        "sort": ["Coalition", "Labor", "Greens", "Independents / Teals"],
+        "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+      }
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "line",
+          "color": "#9CA3AF",
+          "strokeWidth": 2
+        },
+        "encoding": {
+          "x": {
+            "field": "pct",
+            "type": "quantitative",
+            "title": "First Preference Vote Share (%)",
+            "scale": {"domain": [5, 45]},
+            "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+          },
+          "detail": {"field": "party"}
+        }
+      },
+      {
+        "mark": {"type": "point", "size": 110, "filled": true},
+        "encoding": {
+          "x": {
+            "field": "pct",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "gender",
+            "type": "nominal",
+            "scale": {
+              "domain": ["Men", "Women"],
+              "range": ["#2563EB", "#DB2777"]
+            },
+            "legend": {
+              "title": "Gender",
+              "orient": "bottom",
+              "labelFont": "Public Sans",
+              "titleFont": "Public Sans"
+            }
+          },
+          "tooltip": [
+            {"field": "party", "type": "nominal", "title": "Party"},
+            {"field": "gender", "type": "nominal", "title": "Gender"},
+            {"field": "pct", "type": "quantitative", "title": "Vote Share (%)", "format": ".1f"}
+          ]
+        }
+      }
+    ],
+    "config": {
+      "view": {"stroke": "transparent"}
+    }
+  }

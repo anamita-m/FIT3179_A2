@@ -1,3 +1,274 @@
-<h1>Australian Federal Election Visualisation</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australian Federal Elections: Duopoly Decline & Demographic Divides</title>
 
-<body> </body>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    :root {
+      --bg-color: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --border-color: #E5E7EB;
+      --text-main: #1F2937;
+      --text-muted: #4B5563;
+    }
+
+    body {
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 2.5rem 1.5rem;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 3rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      margin: 0 0 0.5rem 0;
+      font-weight: 700;
+    }
+
+    p.lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 75ch;
+    }
+
+
+    .section-block {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+      color: #111827;
+      align-items: center;
+    }
+
+
+    .row-3col {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 28px;
+      margin-bottom: 2rem;
+      align-items: start;
+    }
+
+    .text-column {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .text-column h3 {
+      margin-top: 0;
+      font-size: 1.15rem;
+      color: #111827;
+    }
+
+    .text-column p {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .graph-column {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 320px;
+    }
+
+
+    @media (max-width: 900px) {
+      .row-3col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: #6B7280;
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Australia's Political Landscape</h1>
+      <p class="lead">Introduction. Talk about rise of deal, decline in duopoloy, one nation, gender gap, generational trends.</p>
+    </header>
+
+    <!-- ================= PART 1 ================= -->
+    <section class="section-block">
+      <h2 class="section-title">Who are Australia's Political Parties?</h2>
+
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>2025 House of Repersentation</h3>
+          <p>List different parties</p>
+          <p>Explain trends</p>
+        </div>
+        <div class="graph-column" id="vis-party-compass"></div>
+      </div>
+    </section>
+
+    <!-- ================= PART 2 ================= -->
+    <section class="section-block">
+      <h2 class="section-title">2025 Election Results</h2>
+
+      <!-- Geographic Choropleth -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Geographic Choropleth Map</h3>
+          <p>Explain trends</p>
+        </div>
+        <div class="graph-column" id="vis-choropleth-map"></div>
+      </div>
+
+      <!-- Spike Map -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Turnout & Informal Voting Spike Map</h3>
+          <p>Explain trends</p>
+        </div>
+        <div class="graph-column" id="vis-spike-map"></div>
+      </div>
+
+      <!-- Hexagonal Map -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Parliamentary Seat Distribution Hexagonal Map</h3>
+          <p>Explain</p>
+        </div>
+        <div class="graph-column" id="vis-hex-map"></div>
+      </div>
+    </section>
+
+    <!-- ================= PART 3 ================= -->
+    <section class="section-block">
+      <h2 class="section-title">Long Term Election Trends</h2>
+
+      <!-- Stream Graph -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Stream graph - primary voters share</h3>
+          <p> Collapse of duopoly or each year who won</p>
+        </div>
+        <div class="graph-column" id="vis-streamgraph"></div>
+      </div>
+
+        <!-- Lollipop Chart -->
+        <div class="row-3col">
+            <div class="text-column">
+            <h3>Two-Party Preferred (2PP) Swings</h3>
+            <p>Explain</p>
+            </div>
+            <div class="graph-column" id="vis-lollipop-swing"></div>
+        </div>
+
+    <!-- ================= PART 4 ================= -->
+    <section class="section-block">
+      <h2 class="section-title">Demographics & Voting Behaviour</h2>
+
+      <!-- Rise of Teal / High Income Suburbs -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Rise of Teal & Left Voting in High-Income Suburbs</h3>
+          <p>explain</p>
+        </div>
+        <div class="graph-column" id="vis-teal-income"></div>
+      </div>
+
+      <!-- Generational Voting Patterns -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Generational Voting Patterns</h3>
+          <p> explain gen alpha, gen z, milernairs, baby boomers</p>
+        </div>
+        <div class="graph-column" id="vis-generational-patterns"></div>
+      </div>
+
+      <!-- Connected Dot Plot: Gender Gap -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Gender Gap</h3>
+          <p>Explain</p>
+        </div>
+        <div class="graph-column" id="vis-gender-connected-dot"></div>
+      </div>
+
+      <!-- Informal Ballots Breakdown -->
+      <div class="row-3col">
+        <div class="text-column">
+          <h3>Informal Ballot Trends</h3>
+          <p>explain</p>
+        </div>
+        <div class="graph-column" id="vis-informal-ballots"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Data Sources: Australian Electoral Commission (AEC)</p>
+    </footer>
+  </div>
+
+  <!-- Vega-Lite Embedding Scripts -->
+  <script>
+    // Part 1
+    vegaEmbed('#vis-party-compass', 'charts/chart1_waffle.vg.json', {actions: false});
+
+    // Part 2
+    vegaEmbed('#vis-choropleth-map', 'charts/chart_choropleth.vg.json', {actions: false});
+    vegaEmbed('#vis-spike-map', 'charts/chart_spike_map.vg.json', {actions: false});
+    vegaEmbed('#vis-hex-map', 'charts/chart_hex_map.vg.json', {actions: false});
+
+    // Part 3
+    vegaEmbed('#vis-streamgraph', 'charts/chart3_streamgraph.vg.json', {actions: false});
+    vegaEmbed('#vis-lollipop-swing', 'charts/Lolipop_2PPSwing.json', {actions: false});
+
+    // Part 4
+    vegaEmbed('#vis-teal-income', 'charts/chart_teal_income.vg.json', {actions: false});
+    vegaEmbed('#vis-generational-patterns', 'charts/chart_generational.vg.json', {actions: false});
+    vegaEmbed('#vis-gender-connected-dot', 'charts/chart5_connected_dot.vg.json', {actions: false});
+    vegaEmbed('#vis-informal-ballots', 'charts/chart_informal.vg.json', {actions: false});
+  </script>
+</body>
+</html>

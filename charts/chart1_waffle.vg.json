@@ -1,0 +1,97 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Composition of the Australian House of Representatives",
+      "subtitle": "Each square represents 1 of 150 parliamentary seats (76 required for majority)",
+      "anchor": "start",
+      "fontSize": 15,
+      "font": "Public Sans"
+    },
+    "width": 460,
+    "height": 310,
+    "data": {
+      "values": [
+        {"party": "Labor", "count": 77},
+        {"party": "Coalition (Liberals + Nationals)", "count": 58},
+        {"party": "Teal Independents", "count": 10},
+        {"party": "Greens", "count": 4},
+        {"party": "Other Minor / Ind", "count": 1}
+      ]
+    },
+    "transform": [
+      {
+        "calculate": "sequence(0, datum.count)",
+        "as": "seq"
+      },
+      {
+        "flatten": ["seq"]
+      },
+      {
+        "window": [{"op": "row_number", "as": "id"}]
+      },
+      {
+        "calculate": "((datum.id - 1) % 15) + 1",
+        "as": "col"
+      },
+      {
+        "calculate": "ceil(datum.id / 15)",
+        "as": "row"
+      }
+    ],
+    "mark": {
+      "type": "rect",
+      "cornerRadius": 3,
+      "stroke": "#ffffff",
+      "strokeWidth": 2,
+      "size": 22
+    },
+    "encoding": {
+      "x": {
+        "field": "col",
+        "type": "ordinal",
+        "axis": null,
+        "scale": {"padding": 0.15}
+      },
+      "y": {
+        "field": "row",
+        "type": "ordinal",
+        "axis": null,
+        "sort": "descending",
+        "scale": {"padding": 0.15}
+      },
+      "color": {
+        "field": "party",
+        "type": "nominal",
+        "scale": {
+          "domain": [
+            "Labor",
+            "Coalition (Liberals + Nationals)",
+            "Teal Independents",
+            "Greens",
+            "Minors"
+          ],
+          "range": [
+            "#DE3533",
+            "#0047AB",
+            "#00A3AF",
+            "#10C25B",
+            "#8C92AC"
+          ]
+        },
+        "legend": {
+          "title": "Party Bloc",
+          "orient": "bottom",
+          "columns": 2,
+          "labelFont": "Public Sans",
+          "titleFont": "Public Sans",
+          "offset": 15
+        }
+      },
+      "tooltip": [
+        {"field": "party", "type": "nominal", "title": "Party Bloc"}
+      ]
+    },
+    "config": {
+      "view": {"stroke": "transparent"}
+    }
+  }
