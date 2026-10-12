@@ -1,0 +1,28 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Composition of the 47th Australian Parliament (2022)",
+      "subtitle": "Each square represents 1 of 151 House of Representatives seats (76 required for majority)"
+    },
+    "width": 520,
+    "height": 340,
+    "data": { "url": "data/seats_2022.csv" },
+    "mark": { "type": "rect", "cornerRadius": 2, "size": 26 },
+    "encoding": {
+      "x": { "field": "col", "type": "ordinal", "axis": null },
+      "y": { "field": "row", "type": "ordinal", "axis": null, "sort": "descending" },
+      "color": {
+        "field": "party",
+        "type": "nominal",
+        "scale": {
+          "domain": ["Labor", "Liberal", "National", "Greens", "Teal Independent", "Other"],
+          "range": ["#DE3533", "#0047AB", "#006644", "#10C25B", "#00A3AF", "#8C92AC"]
+        }
+      },
+      "tooltip": [
+        { "field": "division", "type": "nominal", "title": "Division" },
+        { "field": "party", "type": "nominal", "title": "Party" }
+      ]
+    },
+    "config": { "view": { "stroke": "transparent" } }
+  }

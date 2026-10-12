@@ -1,0 +1,12 @@
+2025 Federal Election Enrolment by State [Event:31496 Phase:FinalResults Generated:2025-06-16T10:39:14 Cycle:194a421d-c559-4a18-a78a-90c7cf2acb4e Created:2025-06-16T10:36:42 Environment:PROD Site:CANBERRA Server:Internal Version:10.11.386.0]
+StateAb,StateNm,CloseOfRollsEnrolment,NotebookRollAdditions,NotebookRollDeletions,ReinstatementsPostal,ReinstatementsPrePoll,ReinstatementsAbsent,ReinstatementsProvisional,Enrolment
+NSW,New South Wales,5694989,114,2956,11,43,8,61,5692270
+VIC,Victoria,4580348,169,2145,5,45,4,27,4578453
+QLD,Queensland,3738087,35,1793,29,194,106,168,3736826
+WA,Western Australia,1888877,17,884,1,3,1,1,1888016
+SA,South Australia,1306900,23,803,41,163,82,259,1306665
+TAS,Tasmania,411681,27,254,7,57,9,69,411596
+ACT,Australian Capital Territory,322356,28,159,1,7,2,11,322246
+NT,Northern Territory,155559,2,42,0,0,0,0,155519
+
+
