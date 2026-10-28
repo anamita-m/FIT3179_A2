@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Australian Federal Elections: Duopoly Decline & Demographic Divides</title>
-
+  <title>How Australia Voted in 2025</title>
+  <meta name="description" content="A data story about the 2025 Australian federal election: who won, who voted for whom, and who didn't vote at all.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
@@ -16,297 +16,670 @@
 
   <style>
     :root {
-      --bg-color: #F8F9FA;
-      --card-bg: #FFFFFF;
-      --border-color: #E5E7EB;
-      --text-main: #1F2937;
-      --text-muted: #4B5563;
+      --bg: #F2F3F5;
+      --card: #FFFFFF;
+      --line: #E1E4E9;
+      --ink: #16202E;
+      --muted: #566070;
+      --navy: #12203A;
+      --accent: #0A7C86;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'Archivo', 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-h: 58px;
     }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-padding-top: calc(var(--nav-h) + 16px); }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
     body {
-      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
       margin: 0;
-      padding: 2.5rem 1.5rem;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.0625rem;
+      line-height: 1.65;
     }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
+    a { color: var(--accent); }
+    a:focus-visible, .toc a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---------- Sticky top bar ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); gap: 1.5rem; }
+    .brand { font-family: var(--sans); font-weight: 700; font-stretch: 85%; font-size: 1.05rem; color: var(--ink); text-decoration: none; white-space: nowrap; }
+    .toc { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; height: 100%; }
+    .toc li { display: flex; }
+    .toc a {
+      display: flex; align-items: center; padding: 0 0.9rem;
+      font-family: var(--sans); font-size: 0.92rem; font-weight: 600;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 3px solid transparent; margin-bottom: -1px;
+    }
+    .toc a:hover { color: var(--ink); }
+    .toc a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+    /* ---------- Intro card ---------- */
+    .intro { padding: 2rem 0 0; }
+    .intro-card {
+      background: var(--navy); color: #fff;
+      border-radius: 10px; overflow: hidden;
+    }
+    .intro-top {
+      display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 2.5rem; align-items: center;
+      padding: 3rem 3rem 2.5rem;
+    }
+    .intro-card h1 {
+      font-family: var(--sans); font-stretch: 80%; font-weight: 800;
+      font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.02; letter-spacing: -0.01em;
+      margin: 0 0 1.25rem;
+    }
+    .intro-card .dek { font-size: 1.2rem; line-height: 1.55; color: #D5DBE6; margin: 0 0 1.25rem; max-width: 56ch; }
+    .intro-card .dek strong { color: #fff; }
+    .byline { font-family: var(--sans); font-size: 0.85rem; color: #9AA6BA; margin: 0; }
+    .intro-img img { width: 100%; height: auto; max-height: 300px; object-fit: cover; border-radius: 6px; display: block; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); background: #0C1830; }
+    .stat { padding: 1.5rem 3rem 1.6rem 1.5rem; border-left: 1px solid rgba(255,255,255,0.12); }
+    .stat:first-child { border-left: 0; padding-left: 3rem; }
+    .stat .num { display: block; font-family: var(--sans); font-stretch: 80%; font-weight: 800; font-size: 2.6rem; line-height: 1; color: #fff; }
+    .stat .lbl { display: block; margin-top: 0.5rem; font-family: var(--sans); font-size: 0.85rem; line-height: 1.4; color: #AEB9CC; }
+
+    /* ---------- Section headers: open white space, no card ---------- */
+    .part { padding-top: 5.5rem; }
+    .part-head { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem; margin-bottom: 2.5rem; align-items: end; }
+    .part-head h2 {
+      font-family: var(--sans); font-stretch: 80%; font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.05; margin: 0;
+    }
+    .part-head p { margin: 0; font-size: 1.15rem; color: var(--muted); max-width: 52ch; }
+
+    /* ---------- Cards ---------- */
+    .row { display: grid; gap: 1.5rem; margin-bottom: 1.5rem; align-items: start; }
+    .row.text-left  { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+    .row.text-right { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .row.stack      { grid-template-columns: 1fr; }
+    .row.pair       { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row.text-right .text-card { order: 2; }
+
+    .text-card, .graph-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    }
+    .text-card { padding: 1.75rem; }
+    .text-card.wide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+    .text-card h3 {
+      font-family: var(--sans); font-stretch: 85%; font-weight: 700;
+      font-size: 1.45rem; line-height: 1.2; margin: 0 0 0.75rem;
+    }
+    .text-card p { margin: 0 0 0.85rem; font-size: 1rem; color: var(--muted); }
+    .text-card p:last-child { margin-bottom: 0; }
+    .text-card .tag { display: block; margin-bottom: 0.5rem; font-family: var(--sans); font-size: 0.85rem; font-weight: 600; color: var(--accent); }
+
+    .graph-card { padding: 1.25rem; min-width: 0; }
+    .vis { overflow-x: auto; display: flex; justify-content: center; min-height: 260px; }
+    .vis .placeholder { align-self: center; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); }
+    .source { margin: 0.75rem 0 0; font-family: var(--sans); font-size: 0.8rem; color: #6B7280; }
+
+    /* ---------- Breaks in the page: big number between sections ---------- */
+    .break { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2rem; align-items: center; padding: 3.5rem 0 2.5rem; }
+    .break .big { font-family: var(--sans); font-stretch: 75%; font-weight: 800; font-size: clamp(4rem, 9vw, 7.5rem); line-height: 0.95; color: var(--navy); }
+    .break p { margin: 0; font-size: 1.25rem; line-height: 1.5; max-width: 40ch; }
+    .break.indent { padding-left: 8%; }
+
+    .subhead {
+      font-family: var(--sans); font-stretch: 85%; font-weight: 700; font-size: 1.5rem;
+      margin: 3.5rem 0 1.25rem; padding-top: 1rem; border-top: 3px solid var(--ink); max-width: 340px;
     }
 
-    header {
-      margin-bottom: 3rem;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 1.5rem;
+    footer { margin-top: 6rem; background: #fff; border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-family: var(--sans); font-size: 0.88rem; color: var(--muted); }
+    footer .wrap { display: block; }
+    footer h4 { margin: 0 0 0.5rem; font-size: 0.95rem; color: var(--ink); }
+    footer p, footer ul { margin: 0; padding-left: 0; list-style: none; }
+    footer ol { margin: 0; padding-left: 1.5rem; list-style: decimal; }
+    footer ol li { margin: 0 0 0.4rem; padding-left: 0.25rem; line-height: 1.5; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .intro-top, .part-head, .break, footer .wrap { grid-template-columns: 1fr; }
+      .row.text-left, .row.text-right, .row.pair { grid-template-columns: 1fr; }
+      .row.text-right .text-card { order: 0; }
+      .text-card.wide { grid-template-columns: 1fr; gap: 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat, .stat:first-child { padding: 1.25rem 1.5rem; border-left: 0; border-top: 1px solid rgba(255,255,255,0.12); }
+      .stat:nth-child(-n+2) { border-top: 0; }
+      .intro-top { padding: 2rem 1.5rem; }
+      .break.indent { padding-left: 0; }
+      .brand { font-size: 0.95rem; }
+    }
+    @media (max-width: 620px) {
+      .wrap { padding: 0 1rem; }
+      .brand { display: none; }
+      .topbar .wrap { justify-content: center; }
+      .toc a { padding: 0 0.6rem; font-size: 0.82rem; }
+      .part { padding-top: 3.5rem; }
     }
 
-    h1 {
-      font-size: 2.3rem;
-      margin: 0 0 0.5rem 0;
-      font-weight: 700;
+    /* ---------- Caption inside a chart card (used in side-by-side pairs) ---------- */
+    .graph-card > .text-card { border: 0; padding: 0.5rem 0.5rem 1rem; }
+    .sub-chart { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+    .sub-label { margin: 0 0 0.75rem; font-family: var(--sans); font-stretch: 85%; font-weight: 700; font-size: 1.05rem; }
+
+    /* ---------- Tighter, finished-looking layout ---------- */
+    .part { padding-top: 4rem; }
+    .part-head { margin-bottom: 2rem; }
+    .row { align-items: stretch; margin-bottom: 1.25rem; }
+    .text-card { display: flex; flex-direction: column; justify-content: center; padding: 1.75rem 1.75rem 1.6rem; }
+    .text-card h3 { margin-bottom: 0.9rem; }
+    .text-card ul { margin: 0; padding-left: 1.15rem; color: var(--muted); font-size: 0.98rem; line-height: 1.55; }
+    .text-card li { margin-bottom: 0.55rem; }
+    .text-card li:last-child { margin-bottom: 0; }
+    .text-card li::marker { color: var(--accent); }
+    .text-card.wide { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: 2rem; }
+    .text-card.wide h3 { margin: 0; font-size: 1.6rem; }
+    .graph-card { display: flex; flex-direction: column; }
+    .graph-card > .vis { flex: 1; align-items: center; min-height: 220px; }
+    .graph-card > .text-card { padding: 0.5rem 0.5rem 1rem; justify-content: flex-start; }
+    .break { padding: 2.5rem 0 1.5rem; }
+    .sub-chart { margin-top: 1.25rem; padding-top: 1rem; }
+    .sub-chart .vis { min-height: 0; }
+    /* Centred, text-free map row */
+    .row.solo { grid-template-columns: minmax(0, 1000px); justify-content: center; }
+    .row.solo .graph-card { align-items: center; }
+    /* Equal-height chart pair: charts centred vertically in matching cards */
+    .row.pair.equal .graph-card > .vis { align-items: center; }
+    .row.pair.equal .source { margin-top: auto; padding-top: 0.75rem; }
+    .text-card p { margin: 0; color: var(--muted); font-size: 1rem; }
+    .graph-card > .text-card { padding: 0.25rem 0.5rem 0.75rem; }
+    .part-head p { font-size: 1.05rem; }
+    /* Map on the left (wider), its matching state chart on the right */
+    .row.map-split { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+    .row.map-split .graph-card > .vis { align-items: center; }
+    .row.map-lollipop { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+    @media (max-width: 960px) {
+      .row.map-split { grid-template-columns: 1fr; }
+      .text-card.wide { grid-template-columns: 1fr; gap: 0.9rem; }
+      .part { padding-top: 3rem; }
     }
-
-    p.lead {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin: 0;
-      max-width: 75ch;
+    /* ---------- Numbered section heads: number, title, then subtitle underneath ---------- */
+    .part-head { display: block; max-width: 760px; }
+    .part-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.6rem; height: 2.6rem; margin-bottom: 0.9rem;
+      border-radius: 50%; background: var(--navy); color: #fff;
+      font-family: var(--sans); font-weight: 800; font-size: 1.25rem; line-height: 1;
     }
+    .part-head h2 { margin: 0 0 0.75rem; }
+    .part-head p { max-width: 60ch; }
+    .toc .n { color: var(--accent); margin-right: 0.4rem; }
+    /* ---------- Text-only cards: light navy tint (chart cards stay white) ---------- */
+    :root { --tint: #E7EDF7; --tint-line: #CFD9EA; --tint-ink: #26354F; }
+    .text-card { background: var(--tint); border-color: var(--tint-line); }
+    .text-card p, .text-card li { color: var(--tint-ink); }
+    .text-card li::marker { color: var(--navy); }
+    .graph-card > .text-card { background: transparent; border: 0; }
+    .graph-card > .text-card p { color: var(--muted); }
 
-
-    .section-block {
-      margin-bottom: 3.5rem;
+    /* ---------- Section heads: number inline with the title, subtitle underneath ---------- */
+    .part-head {
+      display: grid; grid-template-columns: auto minmax(0, 1fr);
+      column-gap: 1rem; align-items: center; max-width: 860px;
     }
-
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-color);
-      color: #111827;
-      align-items: center;
+    .part-num { margin-bottom: 0; flex: none; }
+    .part-head h2 { margin: 0; }
+    .part-head p { grid-column: 2; margin: 0.6rem 0 0; }
+    @media (max-width: 960px) { .part-head { grid-template-columns: auto minmax(0, 1fr); } }
+    /* ---------- One-line headings on desktop ---------- */
+    .intro-top h1 { grid-column: 1 / -1; margin: 0 0 -0.5rem; }
+    .intro-top > div:not(.intro-img) { align-self: center; }
+    @media (min-width: 961px) {
+      .intro-top h1, .part-head h2 { white-space: nowrap; }
+      .part-head { max-width: none; }
     }
-
-
-    .row-3col {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 28px;
-      margin-bottom: 2rem;
-      align-items: start;
+    /* Chart card shrinks to the chart's own width; the text card takes the remaining space */
+    .row.fit-left { grid-template-columns: max-content minmax(0, 1fr); }
+    @media (max-width: 960px) { .row.fit-left { grid-template-columns: 1fr; } }
+    /* Section subtitles run the full width of the line, below the number and title */
+    .part-head p { grid-column: 1 / -1; max-width: none; }
+    @media (min-width: 961px) { .part-head p { white-space: nowrap; } }
+    /* ---------- Seat summary beside the waffle chart ---------- */
+    .result-card { justify-content: center; gap: 1.1rem; padding: 1.75rem 2rem; }
+    .result-card .lede { font-size: 1.15rem; line-height: 1.45; }
+    .result-card .lede strong { color: var(--navy); }
+    .seat-list { list-style: none; margin: 0; padding: 0; font-family: var(--sans); font-size: 0.98rem; }
+    .seat-list li {
+      display: grid; grid-template-columns: 0.9rem 1fr auto; column-gap: 0.75rem; align-items: baseline;
+      margin: 0; padding: 0.5rem 0; border-bottom: 1px solid var(--tint-line);
     }
-
-    .text-column {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    .seat-list li:last-child { border-bottom: 0; }
+    .seat-list .dot { width: 0.8rem; height: 0.8rem; border-radius: 3px; align-self: center; }
+    .seat-list span { color: var(--tint-ink); }
+    .seat-list small { color: var(--muted); font-size: 0.85em; }
+    .seat-list b { font-weight: 800; font-size: 1.15rem; color: var(--navy); font-variant-numeric: tabular-nums; }
+    .seat-list li:has(+ .sub) { border-bottom: 0; padding-bottom: 0.2rem; }
+    .seat-list li.sub { grid-template-columns: 1fr; padding: 0 0 0.5rem 1.65rem; border-bottom: 1px solid var(--tint-line); }
+    .seat-list li.sub span { font-size: 0.85rem; color: var(--muted); }
+    .result-card .verdict { font-weight: 600; color: var(--navy); }
+    /* ---------- Map and swing explanation ---------- */
+    .swing-card { padding: 1.5rem 2rem 1.6rem; gap: 1.1rem; align-items: stretch; }
+    .swing-card .lede { font-size: 1.15rem; line-height: 1.4; }
+    .swing-card .lede strong { color: var(--navy); }
+    .swing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+    .swing-item { padding: 0 1.75rem; border-left: 1px solid var(--tint-line); }
+    .swing-item:first-child { padding-left: 0; border-left: 0; }
+    .swing-item:last-child { padding-right: 0; }
+    .swing-item .tag {
+      display: block; margin-bottom: 0.35rem;
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy);
     }
-
-    .text-column h3 {
-      margin-top: 0;
-      font-size: 1.15rem;
-      color: #111827;
+    .swing-item p { font-size: 0.98rem; line-height: 1.5; color: var(--tint-ink); }
+    .swing-item .figure {
+      display: block; font-family: var(--sans); font-stretch: 80%; font-weight: 800;
+      font-size: 2.4rem; line-height: 1; color: #DE3533; margin-bottom: 0.3rem;
     }
-
-    .text-column p {
-      margin-bottom: 0.75rem;
-      font-size: 0.95rem;
-      color: var(--text-muted);
+    @media (max-width: 960px) {
+      .swing-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .swing-item, .swing-item:first-child, .swing-item:last-child { padding: 1rem 0 0; border-left: 0; border-top: 1px solid var(--tint-line); }
+      .swing-item:first-child { border-top: 0; padding-top: 0; }
     }
-
-    .graph-column {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.25rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 320px;
+    .share-list b { white-space: nowrap; font-size: 1.05rem; }
+    .share-list b em { font-style: normal; font-weight: 600; color: var(--muted); margin: 0 0.1rem; }
+    .result-card .note { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); }
+    /* ---------- Demographic factors card ---------- */
+    .factor-card { gap: 0; }
+    .factor-card .lede { margin-bottom: 1.1rem; }
+    .factor { padding: 0.95rem 0; border-top: 1px solid var(--tint-line); }
+    .factor:last-child { padding-bottom: 0; }
+    .factor .tag {
+      display: block; margin-bottom: 0.3rem;
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy);
     }
-
-
-    @media (max-width: 900px) {
-      .row-3col {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    footer {
-      font-size: 0.85rem;
-      color: #6B7280;
-      text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 3rem;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 1.5rem;
-    }
-
-    .header-text {
-      flex: 1;
-    }
-
-    .header-image img {
-      max-width: 260px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      object-fit: cover;
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .header-container {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-      }
-      .header-image img {
-        max-width: 100%;
-      }
-    }
+    .factor ul { margin: 0; padding-left: 1.1rem; font-family: var(--serif); }
+    .factor li { margin: 0 0 0.35rem; padding: 0; border: 0; display: list-item; font-size: 0.95rem; line-height: 1.45; color: var(--tint-ink); }
+    .factor li:last-child { margin-bottom: 0; }
+    .factor li::marker { color: var(--navy); }
+    .factor li strong { color: var(--navy); }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header class="header-container">
-        <div class="header-text">
-          <h1>Australia's Political Landscape</h1>
-          <p class="lead">Introduction. Talk about rise of deal, decline in duopoloy, one nation, gender gap, generational trends.</p>
+  <nav class="topbar" aria-label="Sections">
+    <div class="wrap">
+      <a class="brand" href="#top">How Australia Voted in 2025</a>
+      <ul class="toc">
+        <li><a href="#results"><span class="n">1</span>2025 Election Results</a></li>
+        <li><a href="#demographics"><span class="n">2</span>Voter Demographics</a></li>
+        <li><a href="#turnout"><span class="n">3</span>Turnout &amp; Informal Voting</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="intro" id="top">
+    <div class="wrap">
+      <div class="intro-card">
+        <div class="intro-top">
+          <h1>How Australia Voted in 2025</h1>
+          <div>
+            <p class="dek">The Labor–Coalition duopoly is shrinking. <strong>Teal independents</strong>, the <strong>Greens</strong> and <strong>One Nation</strong> are taking a bigger share of the vote. <strong>Younger Australians</strong> are leaving the Coalition for Labor and the Greens, and <strong>women</strong> are less likely than men to vote Coalition and more likely to vote Greens or Labor.</p>
+            <p class="byline">By Anamita Mahalanabis, 33867690</p>
+          </div>
+          <div class="intro-img">
+            <img src="images/voting.jpg" alt="Voting in an Australian election" onerror="this.parentNode.style.display='none'">
+          </div>
         </div>
-        <div class="header-image">
-          <img src="images/parties.jpg" alt="Australian Political Parties">
+        <div class="stats">
+          <div class="stat"><span class="num">150</span><span class="lbl">seats in the House of Representatives</span></div>
+          <div class="stat"><span class="num">94</span><span class="lbl">seats won by Labor in 2025</span></div>
+          <div class="stat"><span class="num">1 in 3</span><span class="lbl">first-preference votes went to neither Labor nor the Coalition</span></div>
+          <div class="stat"><span class="num">9 in 10</span><span class="lbl">enrolled voters turned up, because voting is compulsory</span></div>
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
 
     <!-- ================= PART 1 ================= -->
-    <section class="section-block">
-      <h2 class="section-title">Who are Australia's Political Parties?</h2>
-
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>2025 House of Repersentation</h3>
-          <p>List different parties</p>
-          <p>Explain trends</p>
-        </div>
-        <div class="graph-column" id="vis-party-compass"></div>
+    <section class="part" id="results">
+      <div class="part-head">
+        <span class="part-num" aria-hidden="true">1</span>
+        <h2>2025 election results across electorates</h2>
+        <p>Who won, where they won, how far the result swung, and how the two-party system has weakened since 2004.</p>
       </div>
+
+      <div class="row fit-left">
+        <div class="graph-card">
+          <div class="vis" id="vis-house-of-reps"></div>
+        </div>
+        <div class="text-card result-card">
+          <p class="lede"><strong>Labor won a clear majority</strong>, taking 94 of the 150 seats. That is 18 more than the 76 needed to govern.</p>
+          <ul class="seat-list">
+            <li><i class="dot" style="background:#DE3533"></i><span>Labor</span><b>94</b></li>
+            <li><i class="dot" style="background:#0047AB"></i><span>Coalition</span><b>43</b></li>
+            <li class="sub"><span>Liberals and The Nationals</span></li>
+            <li><i class="dot" style="background:#00A3AF"></i><span>Independents</span><b>10</b></li>
+            <li><i class="dot" style="background:#8C92AC"></i><span>Other minor parties</span><b>2</b></li>
+            <li class="sub"><span>Katter&rsquo;s Australian Party (1) and Centre Alliance (1)</span></li>
+            <li><i class="dot" style="background:#10C25B"></i><span>Greens</span><b>1</b></li>
+          </ul>
+          <p class="verdict">Labor therefore forms government, with one of the largest majorities in Australian history.</p>
+        </div>
+      </div>
+
+      <div class="row stack">
+        <div class="text-card swing-card">
+          <p class="lede"><strong>A big swing to Labor cost the Coalition many of its seats.</strong></p>
+          <div class="swing-grid">
+            <div class="swing-item">
+              <span class="tag">Regions</span>
+              <p>Regional areas are the Coalition&rsquo;s strongest territory and its biggest source of wins.</p>
+            </div>
+            <div class="swing-item">
+              <span class="tag">Cities</span>
+              <p>Labor dominates the major cities, alongside a handful of independents.</p>
+            </div>
+            <div class="swing-item stat">
+              <span class="tag">Biggest swing</span>
+              <p><b class="figure">+15.2</b> points to Labor in Braddon, Tasmania, the largest swing in the country.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row map-split map-lollipop">
+        <div class="graph-card"><div class="vis" id="vis-choropleth-map"></div></div>
+        <div class="graph-card"><div class="vis" id="vis-lollipop-swing"></div></div>
+      </div>
+
+      <div class="row text-left">
+        <div class="text-card result-card">
+          <p class="lede"><strong>Labor and the Coalition have both lost vote share since 2004</strong>, as more votes go to the crossbench and independents.</p>
+          <ul class="seat-list share-list">
+            <li><i class="dot" style="background:#0047AB"></i><span>Coalition</span><b>46.7% <em>&rarr;</em> 31.8%</b></li>
+            <li><i class="dot" style="background:#E13940"></i><span>Labor</span><b>37.6% <em>&rarr;</em> 34.6%</b></li>
+            <li><i class="dot" style="background:#00A3A6"></i><span>Independents</span><b>2.5% <em>&rarr;</em> 6.1%</b></li>
+            <li class="sub"><span>More than double their 2004 share</span></li>
+          </ul>
+          <p class="verdict">The Greens and One Nation have also grown, though by less.</p>
+          <p class="note">First-preference share of the vote, 2004 to 2025.</p>
+        </div>
+        <div class="graph-card">
+          <div class="vis" id="vis-streamgraph"></div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ================= PART 2 ================= -->
-    <section class="section-block">
-      <h2 class="section-title">2025 Election Results</h2>
-
-      <!-- Geographic Choropleth -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Geographic Choropleth Map</h3>
-          <p>Explain trends</p>
-        </div>
-        <div class="graph-column" id="vis-choropleth-map"></div>
+    <section class="part" id="demographics">
+      <div class="part-head">
+        <span class="part-num" aria-hidden="true">2</span>
+        <h2>Voter demographics</h2>
+        <p>Income, age and gender are splitting the vote in ways that cut across the old party lines.</p>
       </div>
 
-      <!-- Spike Map -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Turnout & Informal Voting Spike Map</h3>
-          <p>Explain trends</p>
+      <div class="row text-left">
+        <div class="text-card result-card factor-card">
+          <p class="lede"><strong>Three factors shape how Australians vote:</strong> income, generation and gender.</p>
+          <div class="factor">
+            <span class="tag">Income</span>
+            <ul>
+              <li>Higher-income suburbs lean towards teal independents and Labor.</li>
+              <li>Lower-income areas lean more towards the Coalition.</li>
+              <li>Minor parties win far more support in lower-income areas.</li>
+            </ul>
+          </div>
+          <div class="factor">
+            <span class="tag">Generation</span>
+            <ul>
+              <li>Younger Australians are leaving the Coalition for Labor and the Greens.</li>
+              <li>Labor and the Greens gain much of the support the Coalition loses.</li>
+              <li>Gen Z results rest on only 83 survey respondents, so read them with care.</li>
+            </ul>
+          </div>
+          <div class="factor">
+            <span class="tag">Gender</span>
+            <ul>
+              <li>Men are more likely to vote Coalition, by <strong>8.2</strong> percentage points.</li>
+              <li>Women are more likely to vote Labor, by <strong>5.3</strong> points.</li>
+              <li>Women are more likely to vote Greens, by <strong>9.9</strong> points.</li>
+            </ul>
+          </div>
         </div>
-        <div class="graph-column" id="vis-spike-map"></div>
+        <div class="graph-card">
+          <div class="vis" id="vis-butterfly"></div>
+        </div>
       </div>
 
-      <!-- Hexagonal Map -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Parliamentary Seat Distribution Hexagonal Map</h3>
-          <p>Explain</p>
+      <div class="row pair">
+        <div class="graph-card">
+          <div class="vis" id="vis-generational-patterns"></div>
         </div>
-        <div class="graph-column" id="vis-hex-map"></div>
+        <div class="graph-card">
+          <div class="vis" id="vis-gender-connected-dot"></div>
+        </div>
       </div>
     </section>
 
     <!-- ================= PART 3 ================= -->
-    <section class="section-block">
-      <h2 class="section-title">Long Term Election Trends</h2>
-
-      <!-- Stream Graph -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Stream graph - primary voters share</h3>
-          <p> Collapse of duopoly or each year who won</p>
-        </div>
-        <div class="graph-column" id="vis-streamgraph"></div>
+    <section class="part" id="turnout">
+      <div class="part-head">
+        <span class="part-num" aria-hidden="true">3</span>
+        <h2>Voting turnout and informal voting</h2>
+        <p>Voting is compulsory, but not every ballot counts. Where do votes go missing?</p>
       </div>
 
-        <!-- Lollipop Chart -->
-        <div class="row-3col">
-            <div class="text-column">
-            <h3>Two-Party Preferred (2PP) Swings</h3>
-            <p>Explain</p>
-            </div>
-            <div class="graph-column" id="vis-lollipop-swing"></div>
+      <div class="row stack">
+        <div class="text-card result-card">
+          <p class="lede"><strong>Turnout is the share of enrolled voters who cast a ballot.</strong> In 2025, national turnout was 90.67%, the second-lowest in a century, even though enrolment reached a record 98.2% of eligible Australians (18,098,797 people).</p>
         </div>
-
-    <!-- ================= PART 4 ================= -->
-    <section class="section-block">
-      <h2 class="section-title">Demographics & Voting Behaviour</h2>
-
-      <!-- Rise of Teal / High Income Suburbs -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Rise of Teal & Left Voting in High-Income Suburbs</h3>
-          <p>explain</p>
-        </div>
-        <div class="graph-column" id="vis-teal-income"></div>
       </div>
 
-      <!-- Generational Voting Patterns -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Generational Voting Patterns</h3>
-          <p> explain gen alpha, gen z, milernairs, baby boomers</p>
-        </div>
-        <div class="graph-column" id="vis-generational-patterns"></div>
+      <div class="row map-split">
+        <div class="graph-card"><div class="vis" id="vis-turnout-symbol"></div></div>
+        <div class="graph-card"><div class="vis" id="vis-turnout-state"></div></div>
       </div>
 
-      <!-- Connected Dot Plot: Gender Gap -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Gender Gap</h3>
-          <p>Explain</p>
+      <div class="row stack">
+        <div class="text-card result-card">
+          <p class="lede"><strong>Informal votes are ballots that cannot be counted.</strong> A vote is informal when:</p>
+          <ul>
+            <li>it is blank or unmarked;</li>
+            <li>ticks or crosses are used where numbers in order of preference are required;</li>
+            <li>the required number of boxes has not been marked; or</li>
+            <li>it contains writing that identifies the voter.</li>
+          </ul>
+          <p>The national informality rate in 2025 was <strong>5.6%</strong>. The <a href="https://www.aec.gov.au/" target="_blank" rel="noopener">Australian Electoral Commission (AEC)</a> noted the highest rates in Western Sydney electorates, often linked to lower English proficiency, and in Riverina and Calwell, where an unusually large number of candidates appeared on the ballot paper.</p>
         </div>
-        <div class="graph-column" id="vis-gender-connected-dot"></div>
       </div>
 
-      <!-- Informal Ballots Breakdown -->
-      <div class="row-3col">
-        <div class="text-column">
-          <h3>Informal Ballot Trends</h3>
-          <p>explain</p>
-        </div>
-        <div class="graph-column" id="vis-informal-ballots"></div>
+      <div class="row map-split">
+        <div class="graph-card"><div class="vis" id="vis-informal-map"></div></div>
+        <div class="graph-card"><div class="vis" id="vis-informal-state"></div></div>
       </div>
     </section>
+  </main>
 
-    <footer>
-      <p>Data Sources: Australian Electoral Commission (AEC)</p>
-    </footer>
-  </div>
+  <footer>
+    <div class="wrap">
+      <div>
+        <h4>Data sources</h4>
+        <ol>
+          <li>Australian Election Studies 2004 to 2019, Australian National University</li>
+          <li>Australian Electoral Commission (2025). 2025 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2022 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2019 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2016 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2013 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2010 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2007 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). 2004 Federal Election: House of Representatives downloads.</li>
+          <li>Australian Electoral Commission (2025). Federal electoral boundary GIS data</li>
+        </ol>
+      </div>
+    </div>
+  </footer>
 
-  <!-- Vega-Lite Embedding Scripts -->
   <script>
-    // Part 1
-    vegaEmbed('#vis-party-compass', 'charts/chart1_waffle.vg.json', {actions: false});
+    const charts = [
+      ['vis-house-of-reps',         'charts/1_houseofreps_waffle.json'],
+      ['vis-choropleth-map',        'charts/2_electorateresults_choropleth.json'],
+      ['vis-lollipop-swing',        'charts/5_2PPswing_lolipop.json'],
+      ['vis-streamgraph',           'charts/6_partiesovertime_stream.json'],
+      ['vis-butterfly',             'charts/9_butterflychart.json'],
+      ['vis-generational-patterns', 'charts/7_generational_barchart.json'],
+      ['vis-gender-connected-dot',  'charts/8_gendergap_connecteddot.json'],
+      ['vis-turnout-symbol',        'charts/3_turnout_proportionalsymbol.json'],
+      ['vis-informal-map',          'charts/4_informalvoting_binmap.json'],
+      ['vis-turnout-state',         'charts/10_turnoutstate_bar.json'],
+      ['vis-informal-state',        'charts/11_informalstate_pie.json']
+    ];
 
-    // Part 2
-    vegaEmbed('#vis-choropleth-map', 'charts/chart_choropleth.vg.json', {actions: false});
-    vegaEmbed('#vis-spike-map', 'charts/chart_spike_map.vg.json', {actions: false});
-    vegaEmbed('#vis-hex-map', 'charts/chart_hex_map.vg.json', {actions: false});
+    // Per-chart sizes (width/height in px). radius = outer radius of the pie.
+    const resize = {
+      'vis-choropleth-map': { scale: 0.8 },
+      'vis-house-of-reps':  { width: 500, height: 333 },   // 15 x 10 squares, keep cells square
+      'vis-lollipop-swing': { width: 310, height: 400,
+        subtitle: ['The 10 biggest swings in each direction, in percentage points,', 'compared with the 2022 election'] },
+      'vis-turnout-state':  { width: 380, height: 330,
+        subtitle: ['House of Representatives turnout rates across', 'Australian states and territories'] },
+      'vis-informal-state': { width: 260, height: 260, radius: 105 }
+    };
 
-    // Part 3
-    vegaEmbed('#vis-streamgraph', 'charts/chart3_streamgraph.vg.json', {actions: false});
-    vegaEmbed('#vis-lollipop-swing', 'charts/Lolipop_2PPSwing.json', {actions: false});
+    // Scale the choropleth (main map + city insets) by one factor so it fits beside the lollipop.
+    function scaleChoropleth(spec, k) {
+      const sc = o => { o.width = Math.round(o.width * k); o.height = Math.round(o.height * k);
+        const pr = o.projection;
+        if (pr) { pr.scale *= k; if (pr.translate) pr.translate = pr.translate.map(v => v * k); } };
+      const [main, insets] = spec.vconcat;
+      sc(main);
+      insets.concat.forEach(sc);
+      return spec;
+    }
 
-    // Part 4
-    vegaEmbed('#vis-teal-income', 'charts/chart_teal_income.vg.json', {actions: false});
-    vegaEmbed('#vis-generational-patterns', 'charts/chart_generational.vg.json', {actions: false});
-    vegaEmbed('#vis-gender-connected-dot', 'charts/chart5_connected_dot.vg.json', {actions: false});
-    vegaEmbed('#vis-informal-ballots', 'charts/chart_informal.vg.json', {actions: false});
+    function applyResize(spec, o) {
+      if (o.scale) return scaleChoropleth(spec, o.scale);
+      spec.width = o.width; spec.height = o.height;
+      if (o.subtitle && spec.title) spec.title.subtitle = o.subtitle;   // wrap long subtitle to fit the card
+      if (o.radius) setRing(spec, o.radius);
+      return spec;
+    }
+
+    // Donut sizing: outer radius sets the ring, inner radius keeps the same hole ratio,
+    // and the in-ring labels sit halfway between the two.
+    function setRing(spec, outer) {
+      const inner = Math.round(outer * 0.43), mid = Math.round((outer + inner) / 2);
+      (spec.layer || []).forEach(l => {
+        const m = l.mark;
+        if (!m || typeof m !== 'object') return;
+        if ('outerRadius' in m) { m.outerRadius = outer; m.innerRadius = inner; }
+        else if (m.type === 'text' && 'radius' in m) m.radius = mid;
+      });
+    }
+
+    // One typographic scale for every chart: same font, same title, axis and legend sizes.
+    const FONT = 'Public Sans';
+    const TYPE = {
+      title: 14, subtitle: 11,      // chart title / subtitle
+      axisTitle: 11, axisLabel: 10, // axes
+      legendTitle: 11, legendLabel: 10
+    };
+
+    function stripSizes(o) {        // remove per-chart font sizes so the shared config applies
+      if (Array.isArray(o)) return o.forEach(stripSizes);
+      if (o && typeof o === 'object') {
+        delete o.labelFontSize; delete o.titleFontSize;
+        Object.values(o).forEach(stripSizes);
+      }
+    }
+
+    function normalise(spec) {
+      stripSizes(spec);
+      spec.title = Object.assign({}, spec.title, {
+        anchor: 'start', font: FONT, subtitleFont: FONT,
+        fontSize: TYPE.title, subtitleFontSize: TYPE.subtitle, subtitleColor: '#566070'
+      });
+      spec.config = Object.assign({}, spec.config, {
+        font: FONT,
+        axis:   { labelFont: FONT, titleFont: FONT, labelFontSize: TYPE.axisLabel, titleFontSize: TYPE.axisTitle },
+        legend: { labelFont: FONT, titleFont: FONT, labelFontSize: TYPE.legendLabel, titleFontSize: TYPE.legendTitle },
+        text:   { font: FONT, fontSize: TYPE.axisLabel }
+      });
+      return spec;
+    }
+
+    const specs = {}, views = {};
+
+    async function draw(id, spec) {
+      if (views[id]) views[id].finalize();
+      views[id] = (await vegaEmbed('#' + id, spec, { actions: false })).view;
+    }
+
+    const drawn = charts.map(async ([id, url]) => {
+      try {
+        let spec = await (await fetch(url)).json();
+        if (resize[id]) spec = applyResize(spec, resize[id]);
+        specs[id] = normalise(spec);
+        await draw(id, specs[id]);
+      } catch (e) {
+        document.getElementById(id).innerHTML = '<span class="placeholder">Chart not found: ' + url + '</span>';
+      }
+    });
+
+    // Make selected charts fill their cards edge to edge. Each chart is measured after it draws and
+    // its width/height are nudged by the difference, so axis, title and legend space never leaves a gap.
+    // height = total chart height wanted (title, axes and legend included).
+    const FIT = {
+      'vis-lollipop-swing':        { matchCard: 'vis-choropleth-map', height: 620 },
+      'vis-gender-connected-dot':  { height: 580 },
+      'vis-generational-patterns': { height: 580 },
+      'vis-turnout-state':         { matchCard: 'vis-turnout-symbol', height: 540 },
+      'vis-informal-state':        { matchCard: 'vis-informal-map',    height: 540, pie: true, shiftX: 100 }
+    };
+
+    async function fitChart(id) {
+      const cfg = FIT[id], spec = specs[id];
+      if (!spec) return;
+      const el = document.getElementById(id), card = el.closest('.graph-card');
+      const cs = getComputedStyle(card);
+      const innerW = Math.floor(card.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) - 2;
+      let targetH = cfg.height;
+      if (cfg.matchCard && window.matchMedia('(min-width: 961px)').matches) {
+        const mapEmbed = document.getElementById(cfg.matchCard).querySelector('.vega-embed');
+        if (mapEmbed) targetH = mapEmbed.offsetHeight;
+      }
+      for (let i = 0; i < 6; i++) {
+        const embed = el.querySelector('.vega-embed');
+        if (!embed) return;
+        const dW = innerW - embed.offsetWidth, dH = targetH - embed.offsetHeight;
+        if (Math.abs(dW) < 3 && Math.abs(dH) < 3) break;
+        spec.width  = Math.max(180, Math.round(spec.width + dW));
+        spec.height = Math.max(200, Math.round(spec.height + dH));
+        if (cfg.pie) setRing(spec, Math.max(60, Math.floor(Math.min(spec.width / 2 - (cfg.shiftX || 0), spec.height / 2)) - 6));
+        await draw(id, spec);
+      }
+    }
+
+    const fitAll = () => Promise.all(Object.keys(FIT).map(fitChart));
+    Promise.all(drawn).then(fitAll);
+    let resizeTimer;
+    window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(fitAll, 250); });
+
+    const links = document.querySelectorAll('.toc a');
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) links.forEach(a => a.setAttribute('aria-current', String(a.hash === '#' + e.target.id)));
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    document.querySelectorAll('section.part').forEach(p => spy.observe(p));
   </script>
 </body>
 </html>

@@ -1,0 +1,151 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "font": "Public Sans",
+    "subtitleFont": "Public Sans",
+    "anchor": "start",
+    "fontSize": 15,
+    "subtitleFontSize": 12,
+    "text": "2025 turnout by electorate",
+    "subtitle": "Circle area = ballots cast; colour = turnout as a share of enrolled voters, 2025"
+  },
+  "width": 640,
+  "height": 480,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ],
+    "center": [
+      0,
+      -27
+    ],
+    "scale": 700,
+    "translate": [
+      320,
+      240
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "datasets/divisions_2025.json",
+        "format": {
+          "type": "topojson",
+          "feature": "AUS_ELB_region"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F8FAFC",
+        "stroke": "#CBD5E1",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "datasets/division_points.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "informal_pct": "number",
+            "turnout_pct": "number",
+            "votes_cast": "number",
+            "enrolment": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.turnout_pct) && isValid(datum.votes_cast)"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "votes_cast",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "range": [
+              30,
+              700
+            ]
+          },
+          "legend": {
+            "title": "Ballots cast",
+            "orient": "bottom-left",
+            "format": ",.0f",
+            "labelFont": "Public Sans",
+            "titleFont": "Public Sans"
+          }
+        },
+        "color": {
+          "field": "turnout_pct",
+          "type": "quantitative",
+          "scale": {
+            "range": ["#C4C8D0", "#8B5CF6", "#2E1065"]
+          },
+          "legend": {
+            "title": "Turnout (%)",
+            "orient": "bottom-right",
+            "format": ".0f",
+            "labelFont": "Public Sans",
+            "titleFont": "Public Sans"
+          }
+        },
+        "order": {
+          "field": "votes_cast",
+          "type": "quantitative",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "DivisionNm",
+            "title": "Electorate"
+          },
+          {
+            "field": "turnout_pct",
+            "title": "Turnout (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "votes_cast",
+            "title": "Ballots cast",
+            "format": ",.0f"
+          },
+          {
+            "field": "enrolment",
+            "title": "Enrolled",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

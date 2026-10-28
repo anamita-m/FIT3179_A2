@@ -1,0 +1,101 @@
+DivisionLabel,DivisionNm,StateAb,IncomeBracket,Party,Percentage,DisplayShare,SortOrder
+"Grayndler, NSW",Grayndler,NSW,Top 10 High Income,Labor,51.8,-51.8,0
+"Grayndler, NSW",Grayndler,NSW,Top 10 High Income,Coalition,20.2,-20.2,0
+"Grayndler, NSW",Grayndler,NSW,Top 10 High Income,Greens,22.4,-22.4,0
+"Grayndler, NSW",Grayndler,NSW,Top 10 High Income,Independent / Teal,2.1,-2.1,0
+"Grayndler, NSW",Grayndler,NSW,Top 10 High Income,Other,3.5,-3.5,0
+"Sydney, NSW",Sydney,NSW,Top 10 High Income,Labor,40.8,-40.8,1
+"Sydney, NSW",Sydney,NSW,Top 10 High Income,Coalition,20.5,-20.5,1
+"Sydney, NSW",Sydney,NSW,Top 10 High Income,Greens,23.1,-23.1,1
+"Sydney, NSW",Sydney,NSW,Top 10 High Income,Independent / Teal,11.2,-11.2,1
+"Sydney, NSW",Sydney,NSW,Top 10 High Income,Other,4.4,-4.4,1
+"Bennelong, NSW",Bennelong,NSW,Top 10 High Income,Labor,41.2,-41.2,2
+"Bennelong, NSW",Bennelong,NSW,Top 10 High Income,Coalition,42.8,-42.8,2
+"Bennelong, NSW",Bennelong,NSW,Top 10 High Income,Greens,11.5,-11.5,2
+"Bennelong, NSW",Bennelong,NSW,Top 10 High Income,Independent / Teal,2.1,-2.1,2
+"Bennelong, NSW",Bennelong,NSW,Top 10 High Income,Other,2.4,-2.4,2
+"Warringah, NSW",Warringah,NSW,Top 10 High Income,Labor,27.1,-27.1,3
+"Warringah, NSW",Warringah,NSW,Top 10 High Income,Coalition,33.4,-33.4,3
+"Warringah, NSW",Warringah,NSW,Top 10 High Income,Greens,12.2,-12.2,3
+"Warringah, NSW",Warringah,NSW,Top 10 High Income,Independent / Teal,24.3,-24.3,3
+"Warringah, NSW",Warringah,NSW,Top 10 High Income,Other,3.0,-3.0,3
+"Wentworth, NSW",Wentworth,NSW,Top 10 High Income,Labor,21.0,-21.0,4
+"Wentworth, NSW",Wentworth,NSW,Top 10 High Income,Coalition,35.6,-35.6,4
+"Wentworth, NSW",Wentworth,NSW,Top 10 High Income,Greens,11.8,-11.8,4
+"Wentworth, NSW",Wentworth,NSW,Top 10 High Income,Independent / Teal,28.1,-28.1,4
+"Wentworth, NSW",Wentworth,NSW,Top 10 High Income,Other,3.5,-3.5,4
+"Curtin, WA",Curtin,WA,Top 10 High Income,Labor,20.5,-20.5,5
+"Curtin, WA",Curtin,WA,Top 10 High Income,Coalition,41.3,-41.3,5
+"Curtin, WA",Curtin,WA,Top 10 High Income,Greens,10.4,-10.4,5
+"Curtin, WA",Curtin,WA,Top 10 High Income,Independent / Teal,24.8,-24.8,5
+"Curtin, WA",Curtin,WA,Top 10 High Income,Other,3.0,-3.0,5
+"Kooyong, VIC",Kooyong,VIC,Top 10 High Income,Labor,17.2,-17.2,6
+"Kooyong, VIC",Kooyong,VIC,Top 10 High Income,Coalition,42.5,-42.5,6
+"Kooyong, VIC",Kooyong,VIC,Top 10 High Income,Greens,12.8,-12.8,6
+"Kooyong, VIC",Kooyong,VIC,Top 10 High Income,Independent / Teal,24.1,-24.1,6
+"Kooyong, VIC",Kooyong,VIC,Top 10 High Income,Other,3.4,-3.4,6
+"Mitchell, NSW",Mitchell,NSW,Top 10 High Income,Labor,31.2,-31.2,7
+"Mitchell, NSW",Mitchell,NSW,Top 10 High Income,Coalition,53.8,-53.8,7
+"Mitchell, NSW",Mitchell,NSW,Top 10 High Income,Greens,8.5,-8.5,7
+"Mitchell, NSW",Mitchell,NSW,Top 10 High Income,Independent / Teal,2.1,-2.1,7
+"Mitchell, NSW",Mitchell,NSW,Top 10 High Income,Other,4.4,-4.4,7
+"Goldstein, VIC",Goldstein,VIC,Top 10 High Income,Labor,11.2,-11.2,8
+"Goldstein, VIC",Goldstein,VIC,Top 10 High Income,Coalition,40.4,-40.4,8
+"Goldstein, VIC",Goldstein,VIC,Top 10 High Income,Greens,12.1,-12.1,8
+"Goldstein, VIC",Goldstein,VIC,Top 10 High Income,Independent / Teal,32.8,-32.8,8
+"Goldstein, VIC",Goldstein,VIC,Top 10 High Income,Other,3.5,-3.5,8
+"Bradfield, NSW",Bradfield,NSW,Top 10 High Income,Labor,20.1,-20.1,9
+"Bradfield, NSW",Bradfield,NSW,Top 10 High Income,Coalition,45.1,-45.1,9
+"Bradfield, NSW",Bradfield,NSW,Top 10 High Income,Greens,9.4,-9.4,9
+"Bradfield, NSW",Bradfield,NSW,Top 10 High Income,Independent / Teal,21.9,-21.9,9
+"Bradfield, NSW",Bradfield,NSW,Top 10 High Income,Other,3.5,-3.5,9
+"Spence, SA",Spence,SA,Top 10 Low Income,Labor,46.2,46.2,10
+"Spence, SA",Spence,SA,Top 10 Low Income,Coalition,25.4,25.4,10
+"Spence, SA",Spence,SA,Top 10 Low Income,Greens,11.2,11.2,10
+"Spence, SA",Spence,SA,Top 10 Low Income,Independent / Teal,3.1,3.1,10
+"Spence, SA",Spence,SA,Top 10 Low Income,Other,14.1,14.1,10
+"Grey, SA",Grey,SA,Top 10 Low Income,Labor,21.4,21.4,11
+"Grey, SA",Grey,SA,Top 10 Low Income,Coalition,42.1,42.1,11
+"Grey, SA",Grey,SA,Top 10 Low Income,Greens,5.8,5.8,11
+"Grey, SA",Grey,SA,Top 10 Low Income,Independent / Teal,4.2,4.2,11
+"Grey, SA",Grey,SA,Top 10 Low Income,Other,26.5,26.5,11
+"Hinkler, QLD",Hinkler,QLD,Top 10 Low Income,Labor,23.1,23.1,12
+"Hinkler, QLD",Hinkler,QLD,Top 10 Low Income,Coalition,42.2,42.2,12
+"Hinkler, QLD",Hinkler,QLD,Top 10 Low Income,Greens,6.1,6.1,12
+"Hinkler, QLD",Hinkler,QLD,Top 10 Low Income,Independent / Teal,3.2,3.2,12
+"Hinkler, QLD",Hinkler,QLD,Top 10 Low Income,Other,25.4,25.4,12
+"Wide Bay, QLD",Wide Bay,QLD,Top 10 Low Income,Labor,21.5,21.5,13
+"Wide Bay, QLD",Wide Bay,QLD,Top 10 Low Income,Coalition,43.4,43.4,13
+"Wide Bay, QLD",Wide Bay,QLD,Top 10 Low Income,Greens,9.2,9.2,13
+"Wide Bay, QLD",Wide Bay,QLD,Top 10 Low Income,Independent / Teal,4.1,4.1,13
+"Wide Bay, QLD",Wide Bay,QLD,Top 10 Low Income,Other,21.8,21.8,13
+"Cowper, NSW",Cowper,NSW,Top 10 Low Income,Labor,18.2,18.2,14
+"Cowper, NSW",Cowper,NSW,Top 10 Low Income,Coalition,39.5,39.5,14
+"Cowper, NSW",Cowper,NSW,Top 10 Low Income,Greens,8.1,8.1,14
+"Cowper, NSW",Cowper,NSW,Top 10 Low Income,Independent / Teal,23.2,23.2,14
+"Cowper, NSW",Cowper,NSW,Top 10 Low Income,Other,11.0,11.0,14
+"Page, NSW",Page,NSW,Top 10 Low Income,Labor,20.4,20.4,15
+"Page, NSW",Page,NSW,Top 10 Low Income,Coalition,43.5,43.5,15
+"Page, NSW",Page,NSW,Top 10 Low Income,Greens,8.4,8.4,15
+"Page, NSW",Page,NSW,Top 10 Low Income,Independent / Teal,12.1,12.1,15
+"Page, NSW",Page,NSW,Top 10 Low Income,Other,15.6,15.6,15
+"Lyne, NSW",Lyne,NSW,Top 10 Low Income,Labor,20.1,20.1,16
+"Lyne, NSW",Lyne,NSW,Top 10 Low Income,Coalition,44.2,44.2,16
+"Lyne, NSW",Lyne,NSW,Top 10 Low Income,Greens,7.5,7.5,16
+"Lyne, NSW",Lyne,NSW,Top 10 Low Income,Independent / Teal,8.2,8.2,16
+"Lyne, NSW",Lyne,NSW,Top 10 Low Income,Other,20.0,20.0,16
+"Flynn, QLD",Flynn,QLD,Top 10 Low Income,Labor,23.2,23.2,17
+"Flynn, QLD",Flynn,QLD,Top 10 Low Income,Coalition,41.5,41.5,17
+"Flynn, QLD",Flynn,QLD,Top 10 Low Income,Greens,4.2,4.2,17
+"Flynn, QLD",Flynn,QLD,Top 10 Low Income,Independent / Teal,3.1,3.1,17
+"Flynn, QLD",Flynn,QLD,Top 10 Low Income,Other,28.0,28.0,17
+"Mallee, VIC",Mallee,VIC,Top 10 Low Income,Labor,16.2,16.2,18
+"Mallee, VIC",Mallee,VIC,Top 10 Low Income,Coalition,49.1,49.1,18
+"Mallee, VIC",Mallee,VIC,Top 10 Low Income,Greens,5.2,5.2,18
+"Mallee, VIC",Mallee,VIC,Top 10 Low Income,Independent / Teal,4.5,4.5,18
+"Mallee, VIC",Mallee,VIC,Top 10 Low Income,Other,25.0,25.0,18
+"Maranoa, QLD",Maranoa,QLD,Top 10 Low Income,Labor,15.2,15.2,19
+"Maranoa, QLD",Maranoa,QLD,Top 10 Low Income,Coalition,56.4,56.4,19
+"Maranoa, QLD",Maranoa,QLD,Top 10 Low Income,Greens,4.1,4.1,19
+"Maranoa, QLD",Maranoa,QLD,Top 10 Low Income,Independent / Teal,2.1,2.1,19
+"Maranoa, QLD",Maranoa,QLD,Top 10 Low Income,Other,22.2,22.2,19

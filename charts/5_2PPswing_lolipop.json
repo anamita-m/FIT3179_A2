@@ -1,0 +1,73 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Where did Labor gain and lose ground?",
+    "subtitle": "The 10 biggest swings in each direction, in percentage points, compared with the 2022 election",
+    "anchor": "start",
+    "fontSize": 16,
+    "font": "Public Sans",
+    "offset": 80
+  },
+  "width": 480,
+  "height": 480,
+  "data": {
+    "url": "datasets/HouseTppByDivision.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Swing": "number",
+        "Australian Labor Party Percentage": "number",
+        "Liberal/National Coalition Percentage": "number"
+      }
+    }
+  },
+  "transform": [
+    {"filter": "abs(datum.Swing - datum['Australian Labor Party Percentage']) > 0.001"},
+    {"calculate": "datum.DivisionNm + ', ' + datum.StateAb", "as": "DivisionLabel"},
+    {"window": [{"op": "rank", "as": "hi"}], "sort": [{"field": "Swing", "order": "descending"}]},
+    {"window": [{"op": "rank", "as": "lo"}], "sort": [{"field": "Swing", "order": "ascending"}]},
+    {"filter": "datum.hi <= 10 || datum.lo <= 10"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "DivisionLabel",
+      "type": "nominal",
+      "sort": {"field": "Swing", "op": "max", "order": "descending"},
+      "title": null,
+      "axis": {"labelFont": "Public Sans", "labelLimit": 200}
+    }
+  },
+  "layer": [ 
+    {
+      "mark": {"type": "rule", "strokeWidth": 3},
+      "encoding": {
+        "x": {
+          "field": "Swing",
+          "type": "quantitative",
+          "title": "Swing in Labor's two-party vote (percentage points)",
+          "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+        },
+        "x2": {"datum": 0},
+        "color": {"condition": {"test": "datum.Swing > 0", "value": "#DE3533"}, "value": "#0047AB"}
+      }
+    },
+    {
+      "mark": {"type": "point", "size": 200, "filled": true, "opacity": 1},
+      "encoding": {
+        "x": {"field": "Swing", "type": "quantitative"},
+        "color": {"condition": {"test": "datum.Swing > 0", "value": "#DE3533"}, "value": "#0047AB"},
+        "tooltip": [
+          {"field": "DivisionLabel", "title": "Division"},
+          {"field": "Australian Labor Party Percentage", "title": "Labor (%)", "format": ".1f"},
+          {"field": "Liberal/National Coalition Percentage", "title": "Coalition (%)", "format": ".1f"},
+          {"field": "Swing", "title": "Swing (pts)", "format": "+.1f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#333", "strokeWidth": 1},
+      "encoding": {"x": {"datum": 0}}
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}}
+}

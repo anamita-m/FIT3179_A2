@@ -1,0 +1,76 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Multi-Party Voting Breakdown Across Household Income Brackets",
+      "subtitle": "Primary vote shares in Top 10 High Income (Left) vs Top 10 Low Income (Right) electorates",
+      "anchor": "start",
+      "font": "Public Sans"
+    },
+    "width": 680,
+    "height": 540,
+    "data": {
+      "url": "datasets/butterfly_chart_income_multi_party.csv"
+    },
+    "mark": {
+      "type": "bar",
+      "cornerRadius": 2
+    },
+    "encoding": {
+      "y": {
+        "field": "DivisionLabel",
+        "type": "nominal",
+        "title": "Division",
+        "sort": {"field": "SortOrder", "order": "ascending"},
+        "axis": {
+          "labelFont": "Public Sans",
+          "titleFont": "Public Sans"
+        }
+      },
+      "x": {
+        "field": "DisplayShare",
+        "type": "quantitative",
+        "title": "← Top 10 High Income Electorates (%) | Top 10 Low Income Electorates (%) →",
+        "scale": {"domain": [-100, 100]},
+        "axis": {
+          "labelExpr": "abs(datum.value) + '%'",
+          "labelFont": "Public Sans",
+          "titleFont": "Public Sans"
+        }
+      },
+      "color": {
+        "field": "Party",
+        "type": "nominal",
+        "scale": {
+          "domain": [
+            "Labor",
+            "Coalition",
+            "Greens",
+            "Independent / Teal",
+            "Other"
+          ],
+          "range": [
+            "#E13940",
+            "#0047AB",
+            "#10C25B",
+            "#00A3A6",
+            "#64748B"
+          ]
+        },
+        "legend": {
+          "orient": "bottom",
+          "columns": 5,
+          "labelFont": "Public Sans",
+          "titleFont": "Public Sans"
+        }
+      },
+      "tooltip": [
+        {"field": "DivisionLabel", "type": "nominal", "title": "Division"},
+        {"field": "IncomeBracket", "type": "nominal", "title": "Income Cohort"},
+        {"field": "Party", "type": "nominal", "title": "Party"},
+        {"field": "Percentage", "type": "quantitative", "title": "Primary Vote (%)", "format": ".1f"}
+      ]
+    },
+    "config": {
+      "view": {"stroke": "transparent"}
+    }
+  }

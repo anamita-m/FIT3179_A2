@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Distribution of Informal Votes by State (2025)",
+    "subtitle": "Share of total informal ballots cast across Australia",
+    "anchor": "start",
+    "font": "Public Sans",
+    "offset": 100
+  },
+  "width": 260,
+  "height": 260,
+  "data": {
+    "url": "datasets/HouseInformalByStateDownload-31496.csv",
+    "format": {"type": "csv", "parse": {"InformalVotes": "number"}}
+  },
+  "transform": [
+    {
+      "calculate": "indexof(['NSW', 'VIC', 'QLD'], datum.StateAb) >= 0 ? datum.StateAb + ' ' + format(datum.InformalVotes / 919512, '.0%') : ''",
+      "as": "label"
+    }
+  ],
+  "encoding": {
+    "theta": {"field": "InformalVotes", "type": "quantitative", "stack": true},
+    "order": {"field": "InformalVotes", "type": "quantitative", "sort": "descending"},
+    "color": {
+      "field": "StateAb",
+      "type": "nominal",
+      "scale": {
+        "domain": ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT"],
+        "range": ["#4C1D95", "#5D359D", "#6E4EA6", "#7F66AE", "#917FB7", "#A297BF", "#B3B0C8", "#C4C8D0"]
+      },
+      "legend": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "x": {"expr": "width / 2 + 100"},
+        "innerRadius": 45,
+        "outerRadius": 105,
+        "stroke": "#ffffff",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "StateNm", "type": "nominal", "title": "State"},
+          {"field": "InformalVotes", "type": "quantitative", "title": "Informal Votes", "format": ","},
+          {"field": "InformalPercent", "type": "quantitative", "title": "Informal Rate (%)", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "x": {"expr": "width / 2 + 100"},
+        "radius": 75,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "font": "Public Sans"
+      },
+      "encoding": {
+        "text": {"field": "label", "type": "nominal"},
+        "color": {"value": "#ffffff"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}}
+}

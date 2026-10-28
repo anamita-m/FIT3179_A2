@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Younger Australians are leaving the Coalition for Labor and the Greens",
+    "subtitle": [
+      "Share of first-preference votes in 2025, by generation (survey of 2,070 voters)",
+      "Gen Z is based on only 83 respondents"
+    ],
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "font": "Public Sans",
+    "subtitleFont": "Public Sans"
+  },
+  "width": 420,
+  "height": 280,
+  "data": {
+    "url": "datasets/generations.csv",
+    "format": {"type": "csv", "parse": {"pct": "number", "n": "number"}}
+  },
+  "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+  "encoding": {
+    "x": {
+      "field": "generation",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Silent Generation (1928-45)",
+        "Baby Boomers (1946-64)",
+        "Gen X (1965-80)",
+        "Millennials (1981-96)",
+        "Gen Z (1997+)"
+      ],
+      "axis": {
+        "labelAngle": -25,
+        "labelLimit": 180,
+        "labelFont": "Public Sans",
+        "labelFontSize": 10
+      }
+    },
+    "xOffset": {
+      "field": "party",
+      "sort": ["Labor", "Coalition", "Greens", "One Nation", "Independent", "Other"]
+    },
+    "y": {
+      "field": "pct",
+      "type": "quantitative",
+      "title": "First-preference share (%)",
+      "scale": {"domain": [0, 50]},
+      "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+    },
+    "color": {
+      "field": "party",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Labor", "Coalition", "Greens", "One Nation", "Independent", "Other"],
+        "range": ["#DE3533", "#0047AB", "#10C25B", "#F28C28", "#00A3AF", "#333333"]
+      },
+      "legend": {
+        "title": null,
+        "orient": "bottom",
+        "columns": 3,
+        "labelFont": "Public Sans"
+      }
+    },
+    "tooltip": [
+      {"field": "generation", "title": "Generation"},
+      {"field": "party", "title": "Party"},
+      {"field": "pct", "title": "Vote share (%)", "format": ".1f"},
+      {"field": "n", "title": "Survey respondents"}
+    ]
+  },
+  "config": {"view": {"stroke": "transparent"}}
+}

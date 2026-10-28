@@ -1,0 +1,31 @@
+generation,party,pct,n
+Baby Boomers (1946-64),Labor,30.2,725
+Gen X (1965-80),Labor,31.9,421
+Gen Z (1997+),Labor,44.5,83
+Millennials (1981-96),Labor,34.9,363
+Silent Generation (1928-45),Labor,30.5,173
+Baby Boomers (1946-64),Coalition,44.2,725
+Gen X (1965-80),Coalition,31.7,421
+Gen Z (1997+),Coalition,29.3,83
+Millennials (1981-96),Coalition,22.8,363
+Silent Generation (1928-45),Coalition,45.8,173
+Baby Boomers (1946-64),Greens,4.2,725
+Gen X (1965-80),Greens,6.8,421
+Gen Z (1997+),Greens,26.2,83
+Millennials (1981-96),Greens,20.2,363
+Silent Generation (1928-45),Greens,1.8,173
+Baby Boomers (1946-64),One Nation,8.2,725
+Gen X (1965-80),One Nation,9,421
+Gen Z (1997+),One Nation,0,83
+Millennials (1981-96),One Nation,3.7,363
+Silent Generation (1928-45),One Nation,8.7,173
+Baby Boomers (1946-64),Independent,8.6,725
+Gen X (1965-80),Independent,8.9,421
+Gen Z (1997+),Independent,0,83
+Millennials (1981-96),Independent,6.4,363
+Silent Generation (1928-45),Independent,9.2,173
+Baby Boomers (1946-64),Other,4.6,725
+Gen X (1965-80),Other,11.7,421
+Gen Z (1997+),Other,0,83
+Millennials (1981-96),Other,12.1,363
+Silent Generation (1928-45),Other,4,173

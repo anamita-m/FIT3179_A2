@@ -1,0 +1,169 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "font": "Public Sans",
+    "subtitleFont": "Public Sans",
+    "anchor": "start",
+    "fontSize": 15,
+    "subtitleFontSize": 12,
+    "text": "2025 informal votes by electorate",
+    "subtitle": "Spike height = share of ballots that were informal, by electorate, 2025"
+  },
+  "width": 640,
+  "height": 480,
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [
+      -18,
+      -36
+    ],
+    "rotate": [
+      -134,
+      0
+    ],
+    "center": [
+      0,
+      -27
+    ],
+    "scale": 700,
+    "translate": [
+      320,
+      240
+    ]
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "datasets/divisions_2025.json",
+        "format": {
+          "type": "topojson",
+          "feature": "AUS_ELB_region"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#F8FAFC",
+        "stroke": "#CBD5E1",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "datasets/division_points.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "informal_pct": "number",
+            "turnout_pct": "number",
+            "votes_cast": "number",
+            "enrolment": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.informal_pct)"
+        },
+        {
+          "calculate": "datum.latitude + datum.informal_pct * 0.3",
+          "as": "tip_lat"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "strokeCap": "round",
+        "opacity": 0.75
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "longitude"
+        },
+        "latitude2": {
+          "field": "tip_lat"
+        },
+        "color": {
+          "field": "informal_pct",
+          "type": "quantitative",
+          "scale": {
+            "range": ["#C4C8D0", "#8B5CF6", "#2E1065"],
+            "domain": [
+              0,
+              18
+            ]
+          },
+          "legend": {
+            "title": "Informal (%)",
+            "orient": "bottom-right",
+            "format": ".0f",
+            "labelFont": "Public Sans",
+            "titleFont": "Public Sans"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "DivisionNm",
+            "title": "Electorate"
+          },
+          {
+            "field": "informal_pct",
+            "title": "Informal (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "datasets/division_points.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "longitude": "number",
+            "latitude": "number",
+            "informal_pct": "number",
+            "turnout_pct": "number",
+            "votes_cast": "number",
+            "enrolment": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "isValid(datum.informal_pct)"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 10,
+        "fill": "#475569",
+        "opacity": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  }
+}

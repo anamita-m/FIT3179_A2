@@ -1,0 +1,79 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Women are less likely to vote Coalition and more likely to vote Greens or Labor",
+    "subtitle": [
+      "First-preference vote share in 2025 by gender (survey of 1,944 voters)",
+      "The number at the end of each line is the gap between men and women"
+    ],
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "font": "Public Sans",
+    "subtitleFont": "Public Sans"
+  },
+  "width": 360,
+  "height": 280,
+  "data": {
+    "url": "datasets/gender.csv",
+    "format": {"type": "csv", "parse": {"pct": "number", "n": "number"}}
+  },
+  "encoding": {
+    "y": {
+      "field": "party",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Labor", "Coalition", "Greens", "One Nation", "Independent", "Other"],
+      "axis": {"labelFont": "Public Sans", "labelFontSize": 12, "domain": false, "ticks": false}
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "line", "color": "#9CA3AF", "strokeWidth": 4},
+      "encoding": {
+        "x": { 
+          "field": "pct",
+          "type": "quantitative",
+          "title": "First-preference vote share (%)",
+          "scale": {"domain": [0, 50]},
+          "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+        },
+        "detail": {"field": "party"}
+      }
+    },
+    {
+      "mark": {"type": "point", "size": 260, "filled": true, "opacity": 1},
+      "encoding": {
+        "x": {"field": "pct", "type": "quantitative"},
+        "color": {
+          "field": "gender",
+          "type": "nominal",
+          "scale": {"domain": ["Men", "Women"], "range": ["#1D4ED8", "#F472B6"]},
+          "legend": {"title": null, "orient": "bottom", "labelFont": "Public Sans"}
+        },
+        "tooltip": [
+          {"field": "party", "title": "Party"},
+          {"field": "gender", "title": "Gender"},
+          {"field": "pct", "title": "Vote share (%)", "format": ".1f"},
+          {"field": "n", "title": "Survey respondents"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"joinaggregate": [
+          {"op": "max", "field": "pct", "as": "hi"},
+          {"op": "min", "field": "pct", "as": "lo"}
+        ], "groupby": ["party"]},
+        {"filter": "datum.pct == datum.hi"},
+        {"calculate": "'gap ' + format(datum.hi - datum.lo, '.1f') + ' pts'", "as": "gapLabel"}
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 10, "font": "Public Sans", "fontSize": 12, "fontWeight": 600, "color": "#4B5563"},
+      "encoding": {
+        "x": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "gapLabel", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}}
+}

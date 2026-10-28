@@ -1,4 +1,3 @@
-2025 Federal Election House of Representatives First Preferences By Party [Event:31496 Phase:FinalResults Generated:2025-06-16T10:38:40 Cycle:194a421d-c559-4a18-a78a-90c7cf2acb4e Created:2025-06-16T10:36:42 Environment:PROD Site:CANBERRA Server:Internal Version:10.11.386.0]
 PartyAb,PartyNm,OrderOfAppearance,Contested,Nominations,Elected,OrdinaryVotes,OrdinaryPercentage,AbsentVotes,AbsentPercentage,ProvisionalVotes,ProvisionalPercentage,PrePollVotes,PrePollPercentage,PostalVotes,PostalPercentage,TotalVotes,TotalPercentage,TotalSwing
 ALP,Australian Labor Party,1,150,150,94,4281714,34.75,162532,32.33,9180,35.79,173337,32.55,727375,34.53,5354138,34.56,1.98
 LP,Liberal,2,106,106,18,2507250,20.35,89203,17.74,3808,14.85,100714,18.92,504241,23.94,3205216,20.69,-3.2

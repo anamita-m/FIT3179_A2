@@ -1,0 +1,608 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "Labor swept the cities; the Coalition is left holding the regions",
+      "subtitle": [
+        "Winning party in each of the 150 seats, 2025",
+        "Most seats are tiny city suburbs, so the five capitals are zoomed in below"
+      ],
+      "anchor": "start",
+      "fontSize": 16,
+      "subtitleFontSize": 12,
+      "subtitleColor": "#4B5563",
+      "font": "Public Sans",
+      "subtitleFont": "Public Sans",
+      "offset": 14
+    },
+    "vconcat": [
+      {
+        "title": {
+          "text": "Australia",
+          "anchor": "start",
+          "font": "Public Sans",
+          "fontSize": 12,
+          "fontWeight": 600,
+          "offset": 6
+        },
+        "width": 760,
+        "height": 440,
+        "view": {
+          "stroke": "transparent"
+        },
+        "data": {
+          "url": "datasets/divisions_2025.json",
+          "format": {
+            "type": "topojson",
+            "feature": "AUS_ELB_region"
+          }
+        },
+        "transform": [
+          {
+            "lookup": "properties.Elect_div",
+            "from": {
+              "data": {
+                "url": "datasets/seats_2025.csv"
+              },
+              "key": "DivisionNm",
+              "fields": [
+                "Bloc",
+                "Member",
+                "PartyNm"
+              ]
+            }
+          }
+        ],
+        "projection": {
+          "type": "conicEqualArea",
+          "parallels": [
+            -18,
+            -36
+          ],
+          "rotate": [
+            -134,
+            0
+          ],
+          "center": [
+            0,
+            -27
+          ],
+          "scale": 700,
+          "translate": [
+            380.0,
+            220.0
+          ]
+        },
+        "mark": {
+          "type": "geoshape",
+          "stroke": "#ffffff",
+          "strokeWidth": 0.4,
+          "clip": true
+        },
+        "encoding": {
+          "color": {
+            "field": "Bloc",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Labor",
+                "Greens",
+                "Teal independents",
+                "Other crossbench",
+                "Coalition"
+              ],
+              "range": [
+                "#DE3533",
+                "#10C25B",
+                "#00A3AF",
+                "#8C92AC",
+                "#0047AB"
+              ]
+            },
+            "legend": {
+              "title": null,
+              "orient": "bottom",
+              "direction": "horizontal",
+              "columns": 5,
+              "labelFont": "Public Sans",
+              "labelFontSize": 12,
+              "symbolType": "square",
+              "symbolSize": 120,
+              "offset": 12
+            }
+          },
+          "tooltip": [
+            {
+              "field": "properties.Elect_div",
+              "title": "Seat"
+            },
+            {
+              "field": "Member",
+              "title": "Member"
+            },
+            {
+              "field": "PartyNm",
+              "title": "Party"
+            }
+          ]
+        }
+      },
+      {
+        "columns": 5,
+        "spacing": 10,
+        "concat": [
+          {
+            "title": {
+              "text": "Sydney",
+              "anchor": "start",
+              "font": "Public Sans",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "offset": 6
+            },
+            "width": 144,
+            "height": 144,
+            "view": {
+              "stroke": "#D1D5DB"
+            },
+            "data": {
+              "url": "datasets/divisions_2025.json",
+              "format": {
+                "type": "topojson",
+                "feature": "AUS_ELB_region"
+              }
+            },
+            "transform": [
+              {
+                "lookup": "properties.Elect_div",
+                "from": {
+                  "data": {
+                    "url": "datasets/seats_2025.csv"
+                  },
+                  "key": "DivisionNm",
+                  "fields": [
+                    "Bloc",
+                    "Member",
+                    "PartyNm"
+                  ]
+                }
+              }
+            ],
+            "projection": {
+              "type": "mercator",
+              "center": [
+                151.0,
+                -33.82
+              ],
+              "scale": 9500,
+              "translate": [
+                72.0,
+                72.0
+              ]
+            },
+            "mark": {
+              "type": "geoshape",
+              "stroke": "#ffffff",
+              "strokeWidth": 0.4,
+              "clip": true
+            },
+            "encoding": {
+              "color": {
+                "field": "Bloc",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Labor",
+                    "Greens",
+                    "Teal independents",
+                    "Other crossbench",
+                    "Coalition"
+                  ],
+                  "range": [
+                    "#DE3533",
+                    "#10C25B",
+                    "#00A3AF",
+                    "#8C92AC",
+                    "#0047AB"
+                  ]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {
+                  "field": "properties.Elect_div",
+                  "title": "Seat"
+                },
+                {
+                  "field": "Member",
+                  "title": "Member"
+                },
+                {
+                  "field": "PartyNm",
+                  "title": "Party"
+                }
+              ]
+            }
+          },
+          {
+            "title": {
+              "text": "Melbourne",
+              "anchor": "start",
+              "font": "Public Sans",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "offset": 6
+            },
+            "width": 144,
+            "height": 144,
+            "view": {
+              "stroke": "#D1D5DB"
+            },
+            "data": {
+              "url": "datasets/divisions_2025.json",
+              "format": {
+                "type": "topojson",
+                "feature": "AUS_ELB_region"
+              }
+            },
+            "transform": [
+              {
+                "lookup": "properties.Elect_div",
+                "from": {
+                  "data": {
+                    "url": "datasets/seats_2025.csv"
+                  },
+                  "key": "DivisionNm",
+                  "fields": [
+                    "Bloc",
+                    "Member",
+                    "PartyNm"
+                  ]
+                }
+              }
+            ],
+            "projection": {
+              "type": "mercator",
+              "center": [
+                145.0,
+                -37.85
+              ],
+              "scale": 9500,
+              "translate": [
+                72.0,
+                72.0
+              ]
+            },
+            "mark": {
+              "type": "geoshape",
+              "stroke": "#ffffff",
+              "strokeWidth": 0.4,
+              "clip": true
+            },
+            "encoding": {
+              "color": {
+                "field": "Bloc",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Labor",
+                    "Greens",
+                    "Teal independents",
+                    "Other crossbench",
+                    "Coalition"
+                  ],
+                  "range": [
+                    "#DE3533",
+                    "#10C25B",
+                    "#00A3AF",
+                    "#8C92AC",
+                    "#0047AB"
+                  ]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {
+                  "field": "properties.Elect_div",
+                  "title": "Seat"
+                },
+                {
+                  "field": "Member",
+                  "title": "Member"
+                },
+                {
+                  "field": "PartyNm",
+                  "title": "Party"
+                }
+              ]
+            }
+          },
+          {
+            "title": {
+              "text": "Brisbane",
+              "anchor": "start",
+              "font": "Public Sans",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "offset": 6
+            },
+            "width": 144,
+            "height": 144,
+            "view": {
+              "stroke": "#D1D5DB"
+            },
+            "data": {
+              "url": "datasets/divisions_2025.json",
+              "format": {
+                "type": "topojson",
+                "feature": "AUS_ELB_region"
+              }
+            },
+            "transform": [
+              {
+                "lookup": "properties.Elect_div",
+                "from": {
+                  "data": {
+                    "url": "datasets/seats_2025.csv"
+                  },
+                  "key": "DivisionNm",
+                  "fields": [
+                    "Bloc",
+                    "Member",
+                    "PartyNm"
+                  ]
+                }
+              }
+            ],
+            "projection": {
+              "type": "mercator",
+              "center": [
+                153.0,
+                -27.5
+              ],
+              "scale": 9500,
+              "translate": [
+                72.0,
+                72.0
+              ]
+            },
+            "mark": {
+              "type": "geoshape",
+              "stroke": "#ffffff",
+              "strokeWidth": 0.4,
+              "clip": true
+            },
+            "encoding": {
+              "color": {
+                "field": "Bloc",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Labor",
+                    "Greens",
+                    "Teal independents",
+                    "Other crossbench",
+                    "Coalition"
+                  ],
+                  "range": [
+                    "#DE3533",
+                    "#10C25B",
+                    "#00A3AF",
+                    "#8C92AC",
+                    "#0047AB"
+                  ]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {
+                  "field": "properties.Elect_div",
+                  "title": "Seat"
+                },
+                {
+                  "field": "Member",
+                  "title": "Member"
+                },
+                {
+                  "field": "PartyNm",
+                  "title": "Party"
+                }
+              ]
+            }
+          },
+          {
+            "title": {
+              "text": "Perth",
+              "anchor": "start",
+              "font": "Public Sans",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "offset": 6
+            },
+            "width": 144,
+            "height": 144,
+            "view": {
+              "stroke": "#D1D5DB"
+            },
+            "data": {
+              "url": "datasets/divisions_2025.json",
+              "format": {
+                "type": "topojson",
+                "feature": "AUS_ELB_region"
+              }
+            },
+            "transform": [
+              {
+                "lookup": "properties.Elect_div",
+                "from": {
+                  "data": {
+                    "url": "datasets/seats_2025.csv"
+                  },
+                  "key": "DivisionNm",
+                  "fields": [
+                    "Bloc",
+                    "Member",
+                    "PartyNm"
+                  ]
+                }
+              }
+            ],
+            "projection": {
+              "type": "mercator",
+              "center": [
+                115.9,
+                -31.95
+              ],
+              "scale": 9500,
+              "translate": [
+                72.0,
+                72.0
+              ]
+            },
+            "mark": {
+              "type": "geoshape",
+              "stroke": "#ffffff",
+              "strokeWidth": 0.4,
+              "clip": true
+            },
+            "encoding": {
+              "color": {
+                "field": "Bloc",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Labor",
+                    "Greens",
+                    "Teal independents",
+                    "Other crossbench",
+                    "Coalition"
+                  ],
+                  "range": [
+                    "#DE3533",
+                    "#10C25B",
+                    "#00A3AF",
+                    "#8C92AC",
+                    "#0047AB"
+                  ]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {
+                  "field": "properties.Elect_div",
+                  "title": "Seat"
+                },
+                {
+                  "field": "Member",
+                  "title": "Member"
+                },
+                {
+                  "field": "PartyNm",
+                  "title": "Party"
+                }
+              ]
+            }
+          },
+          {
+            "title": {
+              "text": "Adelaide",
+              "anchor": "start",
+              "font": "Public Sans",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "offset": 6
+            },
+            "width": 144,
+            "height": 144,
+            "view": {
+              "stroke": "#D1D5DB"
+            },
+            "data": {
+              "url": "datasets/divisions_2025.json",
+              "format": {
+                "type": "topojson",
+                "feature": "AUS_ELB_region"
+              }
+            },
+            "transform": [
+              {
+                "lookup": "properties.Elect_div",
+                "from": {
+                  "data": {
+                    "url": "datasets/seats_2025.csv"
+                  },
+                  "key": "DivisionNm",
+                  "fields": [
+                    "Bloc",
+                    "Member",
+                    "PartyNm"
+                  ]
+                }
+              }
+            ],
+            "projection": {
+              "type": "mercator",
+              "center": [
+                138.6,
+                -34.9
+              ],
+              "scale": 11000,
+              "translate": [
+                72.0,
+                72.0
+              ]
+            },
+            "mark": {
+              "type": "geoshape",
+              "stroke": "#ffffff",
+              "strokeWidth": 0.4,
+              "clip": true
+            },
+            "encoding": {
+              "color": {
+                "field": "Bloc",
+                "type": "nominal",
+                "scale": {
+                  "domain": [
+                    "Labor",
+                    "Greens",
+                    "Teal independents",
+                    "Other crossbench",
+                    "Coalition"
+                  ],
+                  "range": [
+                    "#DE3533",
+                    "#10C25B",
+                    "#00A3AF",
+                    "#8C92AC",
+                    "#0047AB"
+                  ]
+                },
+                "legend": null
+              },
+              "tooltip": [
+                {
+                  "field": "properties.Elect_div",
+                  "title": "Seat"
+                },
+                {
+                  "field": "Member",
+                  "title": "Member"
+                },
+                {
+                  "field": "PartyNm",
+                  "title": "Party"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "spacing": 18,
+    "config": {
+      "view": {
+        "stroke": "transparent"
+      },
+      "font": "Public Sans"
+    }
+  }

@@ -1,0 +1,98 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+      "text": "The Erosion of Australia's Two-Party Duopoly (2004–2025)",
+      "subtitle": "Stream graph showing primary vote share shifting to minor parties and independents",
+      "anchor": "start",
+      "font": "Public Sans"
+    },
+    "width": 680,
+    "height": 420,
+    "data": {
+      "url": "datasets/PartyVotes_Years.csv"
+    },
+    "layer": [
+      {
+        "mark": {
+          "type": "area",
+          "interpolate": "cardinal",
+          "offset": "stream",
+          "opacity": 0.88
+        },
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "timeUnit": "year",
+            "title": "Election Year",
+            "axis": {
+              "format": "%Y",
+              "tickCount": 8,
+              "labelFont": "Public Sans",
+              "titleFont": "Public Sans",
+              "grid": false
+            }
+          },
+          "y": {
+            "aggregate": "sum",
+            "field": "Share",
+            "type": "quantitative",
+            "axis": null
+          },
+          "color": {
+            "field": "Party",
+            "type": "nominal",
+            "title": "Political Group",
+            "scale": {
+              "domain": [
+                "Labor",
+                "Coalition",
+                "Greens",
+                "One Nation",
+                "Independent",
+                "Other"
+              ],
+              "range": [
+                "#E13940",
+                "#0047AB",
+                "#10C25B",
+                "#F97316",
+                "#00A3A6",
+                "#334155"
+              ]
+            },
+            "legend": {
+              "orient": "bottom",
+              "columns": 3,
+              "labelFont": "Public Sans",
+              "titleFont": "Public Sans"
+            }
+          },
+          "tooltip": [
+            {"field": "Year", "type": "temporal", "timeUnit": "year", "title": "Election Year"},
+            {"field": "Party", "type": "nominal", "title": "Group"},
+            {"field": "Share", "type": "quantitative", "title": "Primary Share (%)", "format": ".2f"}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "rule",
+          "strokeDash": [4, 4],
+          "color": "#ffffff",
+          "strokeWidth": 1,
+          "opacity": 0.6
+        },
+        "encoding": {
+          "x": {
+            "field": "Year",
+            "type": "temporal",
+            "timeUnit": "year"
+          }
+        }
+      }
+    ],
+    "config": {
+      "view": {"stroke": "transparent"}
+    }
+  }

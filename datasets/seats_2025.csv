@@ -1,0 +1,151 @@
+DivisionNm,StateAb,Member,PartyNm,Bloc,BlocOrder
+Bean,ACT,David Smith,Australian Labor Party,Labor,0
+Canberra,ACT,Alicia Payne,Australian Labor Party,Labor,0
+Fenner,ACT,Andrew Leigh,Australian Labor Party,Labor,0
+Banks,NSW,Zhi Soon,Australian Labor Party,Labor,0
+Barton,NSW,Ash Ambihaipahar,Australian Labor Party,Labor,0
+Bennelong,NSW,Jerome Laxale,Australian Labor Party,Labor,0
+Blaxland,NSW,Jason Clare,Australian Labor Party,Labor,0
+Chifley,NSW,Ed Husic,Australian Labor Party,Labor,0
+Cunningham,NSW,Alison Byrnes,Australian Labor Party,Labor,0
+Dobell,NSW,Emma Mcbride,Australian Labor Party,Labor,0
+Eden-Monaro,NSW,Kristy Mcbain,Australian Labor Party,Labor,0
+Gilmore,NSW,Fiona Phillips,Australian Labor Party,Labor,0
+Grayndler,NSW,Anthony Albanese,Australian Labor Party,Labor,0
+Greenway,NSW,Michelle Rowland,Australian Labor Party,Labor,0
+Hughes,NSW,David Moncrieff,Australian Labor Party,Labor,0
+Hunter,NSW,Dan Repacholi,Australian Labor Party,Labor,0
+Kingsford Smith,NSW,Matt Thistlethwaite,Australian Labor Party,Labor,0
+Macarthur,NSW,Mike Freelander,Australian Labor Party,Labor,0
+Macquarie,NSW,Susan Templeman,Australian Labor Party,Labor,0
+McMahon,NSW,Chris Bowen,Australian Labor Party,Labor,0
+Newcastle,NSW,Sharon Claydon,Australian Labor Party,Labor,0
+Parramatta,NSW,Andrew Charlton,Australian Labor Party,Labor,0
+Paterson,NSW,Meryl Swanson,Australian Labor Party,Labor,0
+Reid,NSW,Sally Sitou,Australian Labor Party,Labor,0
+Richmond,NSW,Justine Elliot,Australian Labor Party,Labor,0
+Robertson,NSW,Gordon Reid,Australian Labor Party,Labor,0
+Shortland,NSW,Pat Conroy,Australian Labor Party,Labor,0
+Sydney,NSW,Tanya Plibersek,Australian Labor Party,Labor,0
+Watson,NSW,Tony Burke,Australian Labor Party,Labor,0
+Werriwa,NSW,Anne Maree Stanley,Australian Labor Party,Labor,0
+Whitlam,NSW,Carol Berry,Australian Labor Party,Labor,0
+Lingiari,NT,Marion Scrymgour,Australian Labor Party,Labor,0
+Solomon,NT,Luke John Gosling,Australian Labor Party,Labor,0
+Blair,QLD,Shayne Neumann,Australian Labor Party,Labor,0
+Bonner,QLD,Kara Cook,Australian Labor Party,Labor,0
+Brisbane,QLD,Madonna Jarrett,Australian Labor Party,Labor,0
+Dickson,QLD,Ali France,Australian Labor Party,Labor,0
+Forde,QLD,Rowan Holzberger,Australian Labor Party,Labor,0
+Griffith,QLD,Renee Coffey,Australian Labor Party,Labor,0
+Leichhardt,QLD,Matt Smith,Australian Labor Party,Labor,0
+Lilley,QLD,Anika Wells,Australian Labor Party,Labor,0
+Moreton,QLD,Julie-Ann Campbell,Australian Labor Party,Labor,0
+Oxley,QLD,Milton Dick,Australian Labor Party,Labor,0
+Petrie,QLD,Emma Comer,Australian Labor Party,Labor,0
+Rankin,QLD,Jim Chalmers,Australian Labor Party,Labor,0
+Adelaide,SA,Steve Georganas,Australian Labor Party,Labor,0
+Boothby,SA,Louise Miller-Frost,Australian Labor Party,Labor,0
+Hindmarsh,SA,Mark Butler,Australian Labor Party,Labor,0
+Kingston,SA,Amanda Rishworth,Australian Labor Party,Labor,0
+Makin,SA,Tony Zappia,Australian Labor Party,Labor,0
+Spence,SA,Matt Burnell,Australian Labor Party,Labor,0
+Sturt,SA,Claire Clutterham,Australian Labor Party,Labor,0
+Bass,TAS,Jess Teesdale,Australian Labor Party,Labor,0
+Braddon,TAS,Anne Urquhart,Australian Labor Party,Labor,0
+Franklin,TAS,Julie Collins,Australian Labor Party,Labor,0
+Lyons,TAS,Rebecca White,Australian Labor Party,Labor,0
+Aston,VIC,Mary Doyle,Australian Labor Party,Labor,0
+Ballarat,VIC,Catherine King,Australian Labor Party,Labor,0
+Bendigo,VIC,Lisa Chesters,Australian Labor Party,Labor,0
+Bruce,VIC,Julian Hill,Australian Labor Party,Labor,0
+Calwell,VIC,Basem Abdo,Australian Labor Party,Labor,0
+Chisholm,VIC,Carina Garland,Australian Labor Party,Labor,0
+Cooper,VIC,Ged Kearney,Australian Labor Party,Labor,0
+Corangamite,VIC,Libby Coker,Australian Labor Party,Labor,0
+Corio,VIC,Richard Marles,Australian Labor Party,Labor,0
+Deakin,VIC,Matt Gregg,Australian Labor Party,Labor,0
+Dunkley,VIC,Jodie Belyea,Australian Labor Party,Labor,0
+Fraser,VIC,Daniel Mulino,Australian Labor Party,Labor,0
+Gellibrand,VIC,Tim Watts,Australian Labor Party,Labor,0
+Gorton,VIC,Alice Jordan-Baird,Australian Labor Party,Labor,0
+Hawke,VIC,Sam Rae,Australian Labor Party,Labor,0
+Holt,VIC,Cassandra Fernando,Australian Labor Party,Labor,0
+Hotham,VIC,Clare O'Neil,Australian Labor Party,Labor,0
+Isaacs,VIC,Mark Dreyfus,Australian Labor Party,Labor,0
+Jagajaga,VIC,Kate Thwaites,Australian Labor Party,Labor,0
+Lalor,VIC,Joanne Ryan,Australian Labor Party,Labor,0
+Macnamara,VIC,Josh Burns,Australian Labor Party,Labor,0
+Maribyrnong,VIC,Jo Briskey,Australian Labor Party,Labor,0
+McEwen,VIC,Rob Mitchell,Australian Labor Party,Labor,0
+Melbourne,VIC,Sarah Witty,Australian Labor Party,Labor,0
+Menzies,VIC,Gabriel Ng,Australian Labor Party,Labor,0
+Scullin,VIC,Andrew Giles,Australian Labor Party,Labor,0
+Wills,VIC,Peter Khalil,Australian Labor Party,Labor,0
+Brand,WA,Madeleine King,Australian Labor Party,Labor,0
+Bullwinkel,WA,Trish Cook,Australian Labor Party,Labor,0
+Burt,WA,Matt Keogh,Australian Labor Party,Labor,0
+Cowan,WA,Anne Aly,Australian Labor Party,Labor,0
+Fremantle,WA,Josh Wilson,Australian Labor Party,Labor,0
+Hasluck,WA,Tania Lawrence,Australian Labor Party,Labor,0
+Moore,WA,Tom French,Australian Labor Party,Labor,0
+Pearce,WA,Tracey Roberts,Australian Labor Party,Labor,0
+Perth,WA,Patrick Gorman,Australian Labor Party,Labor,0
+Swan,WA,Zaneta Mascarenhas,Australian Labor Party,Labor,0
+Tangney,WA,Sam Lim,Australian Labor Party,Labor,0
+Bradfield,NSW,Nicolette Boele,Independent,Teal independents,2
+Mackellar,NSW,Sophie Scamps,Independent,Teal independents,2
+Warringah,NSW,Zali Steggall,Independent,Teal independents,2
+Wentworth,NSW,Allegra Spender,Independent,Teal independents,2
+Kooyong,VIC,Monique Ryan,Independent,Teal independents,2
+Curtin,WA,Kate Chaney,Independent,Teal independents,2
+Calare,NSW,Andrew Gee,Independent,Teal independents,3
+Fowler,NSW,Dai Le,Independent,Teal independents,3
+Clark,TAS,Andrew Wilkie,Independent,Teal independents,3
+Indi,VIC,Helen Haines,Independent,Teal independents,3
+Ryan,QLD,Elizabeth Watson-Brown,The Greens,Greens,1
+Kennedy,QLD,Bob Katter,Katter's Australian Party (KAP),Other crossbench,3
+Mayo,SA,Rebekha Sharkie,Centre Alliance,Other crossbench,3
+Berowra,NSW,Julian Leeser,Liberal,Coalition,4
+Cook,NSW,Simon Kennedy,Liberal,Coalition,4
+Cowper,NSW,Pat Conaghan,The Nationals,Coalition,4
+Farrer,NSW,Sussan Ley,Liberal,Coalition,4
+Hume,NSW,Angus Taylor,Liberal,Coalition,4
+Lindsay,NSW,Melissa Mcintosh,Liberal,Coalition,4
+Lyne,NSW,Alison Penfold,The Nationals,Coalition,4
+Mitchell,NSW,Alex Hawke,Liberal,Coalition,4
+New England,NSW,Barnaby Joyce,The Nationals,Coalition,4
+Page,NSW,Kevin Hogan,The Nationals,Coalition,4
+Parkes,NSW,Jamie Chaffey,The Nationals,Coalition,4
+Riverina,NSW,Michael Mccormack,The Nationals,Coalition,4
+Bowman,QLD,Henry Pike,Liberal National Party of Queensland,Coalition,4
+Capricornia,QLD,Michelle Landry,Liberal National Party of Queensland,Coalition,4
+Dawson,QLD,Andrew Willcox,Liberal National Party of Queensland,Coalition,4
+Fadden,QLD,Cameron Caldwell,Liberal National Party of Queensland,Coalition,4
+Fairfax,QLD,Ted O'Brien,Liberal National Party of Queensland,Coalition,4
+Fisher,QLD,Andrew Wallace,Liberal National Party of Queensland,Coalition,4
+Flynn,QLD,Colin Boyce,Liberal National Party of Queensland,Coalition,4
+Groom,QLD,Garth Hamilton,Liberal National Party of Queensland,Coalition,4
+Herbert,QLD,Phillip Thompson,Liberal National Party of Queensland,Coalition,4
+Hinkler,QLD,David Batt,Liberal National Party of Queensland,Coalition,4
+Longman,QLD,Terry Young,Liberal National Party of Queensland,Coalition,4
+Maranoa,QLD,David Littleproud,Liberal National Party of Queensland,Coalition,4
+McPherson,QLD,Leon Rebello,Liberal National Party of Queensland,Coalition,4
+Moncrieff,QLD,Angie Bell,Liberal National Party of Queensland,Coalition,4
+Wide Bay,QLD,Llew O'Brien,Liberal National Party of Queensland,Coalition,4
+Wright,QLD,Scott Buchholz,Liberal National Party of Queensland,Coalition,4
+Barker,SA,Tony Pasin,Liberal,Coalition,4
+Grey,SA,Tom Venning,Liberal,Coalition,4
+Casey,VIC,Aaron Violi,Liberal,Coalition,4
+Flinders,VIC,Zoe Mckenzie,Liberal,Coalition,4
+Gippsland,VIC,Darren Chester,The Nationals,Coalition,4
+Goldstein,VIC,Tim Wilson,Liberal,Coalition,4
+La Trobe,VIC,Jason Wood,Liberal,Coalition,4
+Mallee,VIC,Anne Webster,The Nationals,Coalition,4
+Monash,VIC,Mary Aldred,Liberal,Coalition,4
+Nicholls,VIC,Sam Birrell,The Nationals,Coalition,4
+Wannon,VIC,Dan Tehan,Liberal,Coalition,4
+Canning,WA,Andrew Hastie,Liberal,Coalition,4
+Durack,WA,Melissa Price,Liberal,Coalition,4
+Forrest,WA,Ben Small,Liberal,Coalition,4
+O'Connor,WA,Rick Wilson,Liberal,Coalition,4

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Labor holds a commanding majority in the House",
+    "subtitle": "Each square is one of the 150 seats won in 2025 (76 needed for a majority)",
+    "anchor": "start",
+    "fontSize": 15,
+    "subtitleFontSize": 12,
+    "font": "Public Sans",
+    "subtitleFont": "Public Sans"
+  },
+  "width": 460,
+  "height": 310,
+  "data": {
+    "url": "datasets/seats_2025.csv",
+    "format": {"type": "csv", "parse": {"BlocOrder": "number"}}
+  },
+  "transform": [
+    {"window": [{"op": "row_number", "as": "id"}], "sort": [{"field": "BlocOrder", "order": "ascending"}]},
+    {"calculate": "((datum.id - 1) % 15) + 1", "as": "col"},
+    {"calculate": "ceil(datum.id / 15)", "as": "row"}
+  ],
+  "mark": {"type": "rect", "cornerRadius": 3, "stroke": "#ffffff", "strokeWidth": 2},
+  "encoding": {
+    "x": {"field": "col", "type": "ordinal", "axis": null, "scale": {"padding": 0.1}},
+    "y": {"field": "row", "type": "ordinal", "axis": null, "sort": "descending", "scale": {"padding": 0.1}},
+    "color": {
+      "field": "Bloc",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Labor", "Greens", "Teal independents", "Other crossbench", "Coalition"],
+        "range": ["#DE3533", "#10C25B", "#00A3AF", "#8C92AC", "#0047AB"]
+      },
+      "legend": {
+        "title": null,
+        "orient": "bottom",
+        "columns": 5,
+        "labelFont": "Public Sans",
+        "symbolType": "square"
+      }
+    },
+    "tooltip": [
+      {"field": "DivisionNm", "title": "Seat"},
+      {"field": "StateAb", "title": "State"},
+      {"field": "Member", "title": "Member"},
+      {"field": "PartyNm", "title": "Party"}
+    ]
+  },
+  "config": {"view": {"stroke": "transparent"}}
+}

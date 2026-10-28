@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Voter Turnout Percentage by State (2025)",
+    "subtitle": "House of Representatives turnout rates across Australian states and territories",
+    "anchor": "start",
+    "font": "Public Sans",
+    "offset":80
+  },
+  "width": 380,
+  "height": 330,
+  "data": {
+    "url": "datasets/HouseTurnoutByStateDownload-31496.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "StateAb",
+      "type": "nominal",
+      "title": "State / Territory",
+      "sort": {"field": "TurnoutPercentage", "op": "max", "order": "descending"},
+      "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans", "labelAngle": 0}
+    },
+    "y": {
+      "field": "TurnoutPercentage",
+      "type": "quantitative",
+      "title": "Turnout Rate (%)",
+      "scale": {"domain": [0, 100]},
+      "axis": {"labelFont": "Public Sans", "titleFont": "Public Sans"}
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopLeft": 3,
+        "cornerRadiusTopRight": 3,
+        "color": "#3B0764"
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "StateNm", "type": "nominal", "title": "State"},
+          {"field": "TurnoutPercentage", "type": "quantitative", "title": "Turnout (%)", "format": ".2f"},
+          {"field": "Turnout", "type": "quantitative", "title": "Total Turnout Votes", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "dy": -4,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#3B0764",
+        "font": "Public Sans"
+      },
+      "encoding": {
+        "text": {"field": "TurnoutPercentage", "type": "quantitative", "format": ".1f"}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": "transparent"}}
+}
